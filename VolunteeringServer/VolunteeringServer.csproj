@@ -12,9 +12,4 @@
     <ProjectReference Include="..\VolunteeringServerBL\VolunteeringServerBL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTO\" />
-    <Folder Include="Wwwroot\" />
-  </ItemGroup>
-
 </Project>
