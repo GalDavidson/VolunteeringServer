@@ -1,3 +1,9 @@
+
+CREATE TABLE Gender(
+    GenderID INT NOT NULL PRIMARY KEY,
+    GenderType NVARCHAR NOT NULL UNIQUE
+);
+
 CREATE TABLE Volunteers(
     VolunteerID INT NOT NULL PRIMARY KEY,
     fName NVARCHAR NOT NULL,
@@ -10,7 +16,7 @@ CREATE TABLE Volunteers(
     Age FLOAT NOT NULL,
     ActionDate DATETIME NOT NULL
 
-	CONSTRAINT FK_PersonOrder FOREIGN KEY (GenderID)
+	CONSTRAINT FK_VolunteersGender FOREIGN KEY (GenderID)
     REFERENCES Gender(GenderID)
 );
 
