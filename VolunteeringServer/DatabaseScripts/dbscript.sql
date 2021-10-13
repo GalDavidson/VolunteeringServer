@@ -1,64 +1,61 @@
 
-CREATE TABLE Gender(
-    GenderID INT NOT NULL PRIMARY KEY,
-    GenderType NVARCHAR NOT NULL UNIQUE
-);
 
 CREATE TABLE Volunteers(
-    VolunteerID INT NOT NULL PRIMARY KEY,
+    VolunteerID INT IDENTITY(1,1) PRIMARY KEY,
     fName NVARCHAR NOT NULL,
     lName NVARCHAR NOT NULL,
+	Email NVARCHAR NOT NULL UNIQUE,
     UserName NVARCHAR NOT NULL UNIQUE,
-    Email NVARCHAR NOT NULL UNIQUE,
     Pass NVARCHAR NOT NULL,
     ProfilePic NVARCHAR NOT NULL,
 	GenderID INT NOT NULL,
     Age FLOAT NOT NULL,
-    ActionDate DATETIME NOT NULL
-
-	CONSTRAINT FK_VolunteersGender FOREIGN KEY (GenderID)
-    REFERENCES Gender(GenderID)
+    ActionDate DATETIME default GETDATE()
 );
 
 
 
 CREATE TABLE Associations(
-    AssociationID INT NOT NULL PRIMARY KEY,
+    AssociationID INT IDENTITY(1,1) PRIMARY KEY,
     Email NVARCHAR NOT NULL UNIQUE,
     UserName NVARCHAR NOT NULL UNIQUE,
     InformationAbout NVARCHAR NOT NULL,
     PhoneNum NVARCHAR NOT NULL,
     Pass NVARCHAR NOT NULL,
-    ActionDate DATETIME NOT NULL
+    ActionDate DATETIME default GETDATE(),
+	 ProfilePic NVARCHAR NOT NULL
 );
 
 
 
 CREATE TABLE AppAdmin(
-    UserName NVARCHAR NOT NULL,
-    Email NVARCHAR NOT NULL,
-    Pass INT NOT NULL,
+    UserName NVARCHAR NOT NULL UNIQUE,
+    Email NVARCHAR NOT NULL UNIQUE,
+    Pass NVARCHAR NOT NULL,
     AdminName NVARCHAR NOT NULL
 );
 
 
 CREATE TABLE Posts(
-    PostID INT NOT NULL PRIMARY KEY,
-    ActionDate DATETIME NOT NULL,
-    Caption INT NOT NULL,
-    AssociationID INT NOT NULL
+    PostID INT IDENTITY(1,1) PRIMARY KEY,
+    ActionDate DATETIME default GETDATE(),
+    Caption NVARCHAR NOT NULL,
+    AssociationID INT NOT NULL,
+	EventLocation NVARCHAR NOT NULL,
+	EventDate DATETIME NOT NULL
 );
 
 
 
 CREATE TABLE Comments(
-    CommentID INT NOT NULL PRIMARY KEY,
-    Comment NVARCHAR NOT NULL,
+    CommentID INT IDENTITY(1,1) PRIMARY KEY,
+    CommentText NVARCHAR NOT NULL,
     EventID INT NOT NULL,
     VolunteerID INT NOT NULL
 );
-ALTER TABLE
-    Comments ADD PRIMARY KEY comments_commentid_primary(CommentID);
+
+
+
 CREATE TABLE OccupationalAreas(
     ID INT  NOT NULL ,
     OccupationName NVARCHAR NOT NULL
@@ -107,7 +104,7 @@ CREATE TABLE VolunteersInEvents(
     VolumteerID INT NOT NULL,
     RatingNum INT NOT NULL,
     WrittenRating VARCHAR(255) NULL,
-    ActionDate DATETIME NOT NULL
+    ActionDate DATETIME default GETDATE()
 );
 ALTER TABLE
     VolunteersInEvents ADD PRIMARY KEY volunteersinevents_eventid_primary(EventID);
