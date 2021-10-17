@@ -9,7 +9,7 @@ CREATE TABLE Volunteers(
     Pass NVARCHAR NOT NULL,
     ProfilePic NVARCHAR NOT NULL,
 	GenderID INT NOT NULL,
-    Age FLOAT NOT NULL,
+    BirthDate DATE NOT NULL,
     ActionDate DATETIME default GETDATE()
 );
 
@@ -23,12 +23,13 @@ CREATE TABLE Associations(
     PhoneNum NVARCHAR NOT NULL,
     Pass NVARCHAR NOT NULL,
     ActionDate DATETIME default GETDATE(),
-	 ProfilePic NVARCHAR NOT NULL
+	ProfilePic NVARCHAR NOT NULL
 );
 
 
 
 CREATE TABLE AppAdmin(
+    AdminID INT IDENTITY(1,1) PRIMARY KEY,
     UserName NVARCHAR NOT NULL UNIQUE,
     Email NVARCHAR NOT NULL UNIQUE,
     Pass NVARCHAR NOT NULL,
@@ -41,8 +42,7 @@ CREATE TABLE Posts(
     ActionDate DATETIME default GETDATE(),
     Caption NVARCHAR NOT NULL,
     AssociationID INT NOT NULL,
-	EventLocation NVARCHAR NOT NULL,
-	EventDate DATETIME NOT NULL
+	EventID INT
 );
 
 
@@ -57,19 +57,24 @@ CREATE TABLE Comments(
 
 
 CREATE TABLE OccupationalAreas(
-    ID INT  NOT NULL ,
+    OccupationalAreaID INT IDENTITY(1,1) PRIMARY KEY,
     OccupationName NVARCHAR NOT NULL
 );
-ALTER TABLE
-    OccupationalAreas ADD PRIMARY KEY occupationalareas_id_primary(ID);
+
+
+
 CREATE TABLE OccupationalAreasOfAssociation(
-    AssociationsID INT  NOT NULL ,
-    OccupationalAreasID INT NOT NULL
+    AssociationsID INT IDENTITY(1,1),
+    OccupationalAreaID INT IDENTITY(1,1),
+	CONSTRAINT PK_OccupationalAreasOfAssociation PRIMARY KEY (AssociationsID,OccupationalAreaID)
 );
 ALTER TABLE
     OccupationalAreasOfAssociation ADD PRIMARY KEY occupationalareasofassociation_associationsid_primary(AssociationsID);
 ALTER TABLE
     OccupationalAreasOfAssociation ADD PRIMARY KEY occupationalareasofassociation_occupationalareasid_primary(OccupationalAreasID);
+
+
+
 CREATE TABLE Branchs(
     BranchID INT  NOT NULL ,
     BranchLocation NVARCHAR NOT NULL
