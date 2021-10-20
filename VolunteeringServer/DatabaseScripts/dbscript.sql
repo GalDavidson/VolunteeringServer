@@ -1,5 +1,3 @@
-
-
 CREATE TABLE Volunteers(
     VolunteerID INT IDENTITY(1,1) PRIMARY KEY,
     fName NVARCHAR NOT NULL,
@@ -64,53 +62,58 @@ CREATE TABLE OccupationalAreas(
 
 
 CREATE TABLE OccupationalAreasOfAssociation(
-    AssociationsID INT IDENTITY(1,1),
-    OccupationalAreaID INT IDENTITY(1,1),
-	CONSTRAINT PK_OccupationalAreasOfAssociation PRIMARY KEY (AssociationsID,OccupationalAreaID)
+    AssociationID INT FOREIGN KEY REFERENCES Associations (AssociationID),
+    OccupationalAreaID INT FOREIGN KEY REFERENCES OccupationalAreas (OccupationalAreaID),
+	CONSTRAINT PK_OcAreasOfAssociation PRIMARY KEY (AssociationID,OccupationalAreaID)
 );
-ALTER TABLE
-    OccupationalAreasOfAssociation ADD PRIMARY KEY occupationalareasofassociation_associationsid_primary(AssociationsID);
-ALTER TABLE
-    OccupationalAreasOfAssociation ADD PRIMARY KEY occupationalareasofassociation_occupationalareasid_primary(OccupationalAreasID);
 
 
 
-CREATE TABLE Branchs(
-    BranchID INT  NOT NULL ,
+CREATE TABLE Branches(
+    BranchID INT IDENTITY(1,1) PRIMARY KEY,
     BranchLocation NVARCHAR NOT NULL
 );
-ALTER TABLE
-    Branchs ADD PRIMARY KEY branchs_branchid_primary(BranchID);
+
+
+
 CREATE TABLE BranchesOfAssociation(
-    AssociationID INT  NOT NULL ,
-    BranchID INT NOT NULL
+    AssociationID INT FOREIGN KEY REFERENCES Associations (AssociationID),
+    BranchID INT FOREIGN KEY REFERENCES Branches (BranchID),
+	CONSTRAINT PK_BranchesOfAss PRIMARY KEY (AssociationID, BranchID)
 );
-ALTER TABLE
-    BranchesOfAssociation ADD PRIMARY KEY branchesofassociation_associationid_primary(AssociationID);
-ALTER TABLE
-    BranchesOfAssociation ADD PRIMARY KEY branchesofassociation_branchid_primary(BranchID);
-CREATE TABLE Events(
-    EventID INT  NOT NULL,
-    Location NVARCHAR NOT NULL,
+
+
+
+CREATE TABLE DailyEvents(
+    EventID INT IDENTITY(1,1) PRIMARY KEY,
+    EventLocation NVARCHAR NOT NULL,
     Caption NVARCHAR NOT NULL,
-    AssociationID INT NOT NULL
+    AssociationID INT NOT NULL,
+    ActionDate DATETIME default GETDATE(),
+    EventName NVARCHAR NOT NULL,
+    EventDate DATETIME NOT NULL
 );
-ALTER TABLE
-    Events ADD PRIMARY KEY events_eventid_primary(EventID);
+
+
 CREATE TABLE PicturesOfEvents(
-    PicID INT  NOT NULL ,
-    URL INT NOT NULL,
-    EventID INT NOT NULL
+    PicID INT IDENTITY(1,1) PRIMARY KEY,
+    PicURL INT NOT NULL,
+    EventID INT FOREIGN KEY REFERENCES DailyEvents (EventID)
 );
-ALTER TABLE
-    PicturesOfEvents ADD PRIMARY KEY picturesofevents_picid_primary(PicID);
+
+
+
 CREATE TABLE VolunteersInEvents(
-    EventID INT  NOT NULL,
-    VolumteerID INT NOT NULL,
+    EventID INT FOREIGN KEY REFERENCES DailyEvents (EventID),
+    VolunteerID INT FOREIGN KEY REFERENCES Volunteers (VolunteerID),
     RatingNum INT NOT NULL,
     WrittenRating VARCHAR(255) NULL,
     ActionDate DATETIME default GETDATE()
+
+	CONSTRAINT PK_VolInEvents PRIMARY KEY (EventID, VolunteerID)
+
 );
+
 ALTER TABLE
     VolunteersInEvents ADD PRIMARY KEY volunteersinevents_eventid_primary(EventID);
 ALTER TABLE
