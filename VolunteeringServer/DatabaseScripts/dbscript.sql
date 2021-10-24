@@ -83,7 +83,6 @@ CREATE TABLE BranchesOfAssociation(
 );
 
 
-
 CREATE TABLE DailyEvents(
     EventID INT IDENTITY(1,1) PRIMARY KEY,
     EventLocation NVARCHAR NOT NULL,
@@ -97,7 +96,7 @@ CREATE TABLE DailyEvents(
 
 CREATE TABLE PicturesOfEvents(
     PicID INT IDENTITY(1,1) PRIMARY KEY,
-    PicURL INT NOT NULL,
+    PicURL NVARCHAR NOT NULL,
     EventID INT FOREIGN KEY REFERENCES DailyEvents (EventID)
 );
 
@@ -107,11 +106,24 @@ CREATE TABLE VolunteersInEvents(
     EventID INT FOREIGN KEY REFERENCES DailyEvents (EventID),
     VolunteerID INT FOREIGN KEY REFERENCES Volunteers (VolunteerID),
     RatingNum INT NOT NULL,
-    WrittenRating VARCHAR(255) NULL,
+    WrittenRating NVARCHAR,
     ActionDate DATETIME default GETDATE()
 
 	CONSTRAINT PK_VolInEvents PRIMARY KEY (EventID, VolunteerID)
 
+);
+
+
+CREATE TABLE PicturesOfPosts(
+    PicID INT IDENTITY(1,1) PRIMARY KEY,
+    PicURL NVARCHAR NOT NULL,
+    PostID INT FOREIGN KEY REFERENCES Posts (PostID)
+);
+
+
+CREATE TABLE Gender(
+    GenderID INT IDENTITY(1,1) PRIMARY KEY,
+    GenderType NVARCHAR NOT NULL
 );
 
 ALTER TABLE
