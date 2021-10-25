@@ -1,3 +1,10 @@
+CREATE TABLE Gender(
+    GenderID INT IDENTITY(1,1) PRIMARY KEY,
+    GenderType NVARCHAR NOT NULL
+);
+
+
+
 CREATE TABLE Volunteers(
     VolunteerID INT IDENTITY(1,1) PRIMARY KEY,
     fName NVARCHAR NOT NULL,
@@ -6,7 +13,7 @@ CREATE TABLE Volunteers(
     UserName NVARCHAR NOT NULL UNIQUE,
     Pass NVARCHAR NOT NULL,
     ProfilePic NVARCHAR NOT NULL,
-	GenderID INT NOT NULL,
+	GenderID INT FOREIGN KEY REFERENCES Gender (GenderID),
     BirthDate DATE NOT NULL,
     ActionDate DATETIME default GETDATE()
 );
@@ -32,24 +39,6 @@ CREATE TABLE AppAdmin(
     Email NVARCHAR NOT NULL UNIQUE,
     Pass NVARCHAR NOT NULL,
     AdminName NVARCHAR NOT NULL
-);
-
-
-CREATE TABLE Posts(
-    PostID INT IDENTITY(1,1) PRIMARY KEY,
-    ActionDate DATETIME default GETDATE(),
-    Caption NVARCHAR NOT NULL,
-    AssociationID INT NOT NULL,
-	EventID INT
-);
-
-
-
-CREATE TABLE Comments(
-    CommentID INT IDENTITY(1,1) PRIMARY KEY,
-    CommentText NVARCHAR NOT NULL,
-    EventID INT NOT NULL,
-    VolunteerID INT NOT NULL
 );
 
 
@@ -87,11 +76,21 @@ CREATE TABLE DailyEvents(
     EventID INT IDENTITY(1,1) PRIMARY KEY,
     EventLocation NVARCHAR NOT NULL,
     Caption NVARCHAR NOT NULL,
-    AssociationID INT NOT NULL,
+    AssociationID INT FOREIGN KEY REFERENCES Associations (AssociationID),
     ActionDate DATETIME default GETDATE(),
     EventName NVARCHAR NOT NULL,
     EventDate DATETIME NOT NULL
 );
+
+
+CREATE TABLE Posts(
+    PostID INT IDENTITY(1,1) PRIMARY KEY,
+    ActionDate DATETIME default GETDATE(),
+    Caption NVARCHAR NOT NULL,
+    AssociationID INT FOREIGN KEY REFERENCES Associations (AssociationID),
+	EventID INT FOREIGN KEY REFERENCES DailyEvents (EventID)
+);
+
 
 
 CREATE TABLE PicturesOfEvents(
@@ -113,6 +112,13 @@ CREATE TABLE VolunteersInEvents(
 
 );
 
+CREATE TABLE Comments(
+    CommentID INT IDENTITY(1,1) PRIMARY KEY,
+    CommentText NVARCHAR NOT NULL,
+    EventID INT NOT NULL,
+    VolunteerID INT NOT NULL,
+	CONSTRAINT FK_EventsComments FOREIGN KEY (EventID,VolunteerID) REFERENCES VolunteersInEvents(EventID,VolunteerID)
+);
 
 CREATE TABLE PicturesOfPosts(
     PicID INT IDENTITY(1,1) PRIMARY KEY,
@@ -121,22 +127,11 @@ CREATE TABLE PicturesOfPosts(
 );
 
 
-CREATE TABLE Gender(
-    GenderID INT IDENTITY(1,1) PRIMARY KEY,
-    GenderType NVARCHAR NOT NULL
+
+CREATE TABLE OccupationalAreasOfPosts(
+    PostID INT FOREIGN KEY REFERENCES Posts (PostID),
+    OccupationalAreaID INT FOREIGN KEY REFERENCES DailyEvents (EventID),
+	CONSTRAINT PK_OccuAreasPosts PRIMARY KEY (PostID, OccupationalAreaID)
 );
 
-ALTER TABLE
-    VolunteersInEvents ADD PRIMARY KEY volunteersinevents_eventid_primary(EventID);
-ALTER TABLE
-    VolunteersInEvents ADD PRIMARY KEY volunteersinevents_volumteerid_primary(VolumteerID);
-ALTER TABLE
-    Events ADD CONSTRAINT events_associationid_foreign FOREIGN KEY(AssociationID) REFERENCES Associations(AssociationID);
-ALTER TABLE
-    Posts ADD CONSTRAINT posts_associationid_foreign FOREIGN KEY(AssociationID) REFERENCES Associations(AssociationID);
-ALTER TABLE
-    PicturesOfEvents ADD CONSTRAINT picturesofevents_eventid_foreign FOREIGN KEY(EventID) REFERENCES Events(EventID);
-ALTER TABLE
-    Comments ADD CONSTRAINT comments_eventid_foreign FOREIGN KEY(EventID) REFERENCES Events(EventID);
-ALTER TABLE
-    Comments ADD CONSTRAINT comments_volunteerid_foreign FOREIGN KEY(VolunteerID) REFERENCES VolunteersInEvents(VolumteerID);
+
