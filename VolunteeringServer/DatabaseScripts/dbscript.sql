@@ -15,12 +15,12 @@ CREATE TABLE Gender(
 
 CREATE TABLE Volunteers(
     VolunteerID INT IDENTITY(1,1) PRIMARY KEY,
-    fName NVARCHAR NOT NULL,
-    lName NVARCHAR NOT NULL,
-	Email NVARCHAR NOT NULL UNIQUE,
-    UserName NVARCHAR NOT NULL UNIQUE,
-    Pass NVARCHAR NOT NULL,
-    ProfilePic NVARCHAR NOT NULL,
+    fName NVARCHAR(255) NOT NULL,
+    lName NVARCHAR(255) NOT NULL,
+	Email NVARCHAR(255) NOT NULL UNIQUE,
+    UserName NVARCHAR(255) NOT NULL UNIQUE,
+    Pass NVARCHAR(255) NOT NULL,
+    ProfilePic NVARCHAR(255) NOT NULL,
 	GenderID INT FOREIGN KEY REFERENCES Gender (GenderID),
     BirthDate DATE NOT NULL,
     ActionDate DATETIME default GETDATE()
@@ -30,30 +30,30 @@ CREATE TABLE Volunteers(
 
 CREATE TABLE Associations(
     AssociationID INT IDENTITY(1,1) PRIMARY KEY,
-    Email NVARCHAR NOT NULL UNIQUE,
-    UserName NVARCHAR NOT NULL UNIQUE,
-    InformationAbout NVARCHAR NOT NULL,
-    PhoneNum NVARCHAR NOT NULL,
-    Pass NVARCHAR NOT NULL,
+    Email NVARCHAR(255) NOT NULL UNIQUE,
+    UserName NVARCHAR(255) NOT NULL UNIQUE,
+    InformationAbout NVARCHAR(255) NOT NULL,
+    PhoneNum NVARCHAR(255) NOT NULL,
+    Pass NVARCHAR(255) NOT NULL,
     ActionDate DATETIME default GETDATE(),
-	ProfilePic NVARCHAR NOT NULL
+	ProfilePic NVARCHAR(255) NOT NULL
 );
 
 
 
 CREATE TABLE AppAdmin(
     AdminID INT IDENTITY(1,1) PRIMARY KEY,
-    UserName NVARCHAR NOT NULL UNIQUE,
-    Email NVARCHAR NOT NULL UNIQUE,
-    Pass NVARCHAR NOT NULL,
-    AdminName NVARCHAR NOT NULL
+    UserName NVARCHAR(255) NOT NULL UNIQUE,
+    Email NVARCHAR(255) NOT NULL UNIQUE,
+    Pass NVARCHAR(255) NOT NULL,
+    AdminName NVARCHAR(255) NOT NULL
 );
 
 
 
 CREATE TABLE OccupationalAreas(
     OccupationalAreaID INT IDENTITY(1,1) PRIMARY KEY,
-    OccupationName NVARCHAR NOT NULL
+    OccupationName NVARCHAR(255) NOT NULL
 );
 
 
@@ -68,7 +68,7 @@ CREATE TABLE OccupationalAreasOfAssociation(
 
 CREATE TABLE Branches(
     BranchID INT IDENTITY(1,1) PRIMARY KEY,
-    BranchLocation NVARCHAR NOT NULL
+    BranchLocation NVARCHAR(255) NOT NULL
 );
 
 
@@ -82,11 +82,11 @@ CREATE TABLE BranchesOfAssociation(
 
 CREATE TABLE DailyEvents(
     EventID INT IDENTITY(1,1) PRIMARY KEY,
-    EventLocation NVARCHAR NOT NULL,
-    Caption NVARCHAR NOT NULL,
+    EventLocation NVARCHAR(255) NOT NULL,
+    Caption NVARCHAR(255) NOT NULL,
     AssociationID INT FOREIGN KEY REFERENCES Associations (AssociationID),
     ActionDate DATETIME default GETDATE(),
-    EventName NVARCHAR NOT NULL,
+    EventName NVARCHAR(255) NOT NULL,
     EventDate DATETIME NOT NULL
 );
 
@@ -94,7 +94,7 @@ CREATE TABLE DailyEvents(
 CREATE TABLE Posts(
     PostID INT IDENTITY(1,1) PRIMARY KEY,
     ActionDate DATETIME default GETDATE(),
-    Caption NVARCHAR NOT NULL,
+    Caption NVARCHAR(255) NOT NULL,
     AssociationID INT FOREIGN KEY REFERENCES Associations (AssociationID),
 	EventID INT FOREIGN KEY REFERENCES DailyEvents (EventID)
 );
@@ -103,7 +103,7 @@ CREATE TABLE Posts(
 
 CREATE TABLE PicturesOfEvents(
     PicID INT IDENTITY(1,1) PRIMARY KEY,
-    PicURL NVARCHAR NOT NULL,
+    PicURL NVARCHAR(255) NOT NULL,
     EventID INT FOREIGN KEY REFERENCES DailyEvents (EventID)
 );
 
@@ -113,7 +113,7 @@ CREATE TABLE VolunteersInEvents(
     EventID INT FOREIGN KEY REFERENCES DailyEvents (EventID),
     VolunteerID INT FOREIGN KEY REFERENCES Volunteers (VolunteerID),
     RatingNum INT NOT NULL,
-    WrittenRating NVARCHAR,
+    WrittenRating NVARCHAR(255),
     ActionDate DATETIME default GETDATE()
 
 	CONSTRAINT PK_VolInEvents PRIMARY KEY (EventID, VolunteerID)
@@ -122,7 +122,7 @@ CREATE TABLE VolunteersInEvents(
 
 CREATE TABLE Comments(
     CommentID INT IDENTITY(1,1) PRIMARY KEY,
-    CommentText NVARCHAR NOT NULL,
+    CommentText NVARCHAR(255) NOT NULL,
     EventID INT NOT NULL,
     VolunteerID INT NOT NULL,
 	CONSTRAINT FK_EventsComments FOREIGN KEY (EventID,VolunteerID) REFERENCES VolunteersInEvents(EventID,VolunteerID)
@@ -130,7 +130,7 @@ CREATE TABLE Comments(
 
 CREATE TABLE PicturesOfPosts(
     PicID INT IDENTITY(1,1) PRIMARY KEY,
-    PicURL NVARCHAR NOT NULL,
+    PicURL NVARCHAR(255) NOT NULL,
     PostID INT FOREIGN KEY REFERENCES Posts (PostID)
 );
 
@@ -147,195 +147,285 @@ CREATE TABLE OccupationalAreasOfPosts(
 
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Afula');
+VALUES ('אום אל-פחם');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Arad');
+VALUES ('אופקים');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Ashdod');
+VALUES ('אור יהודה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Ashkelon');
+VALUES ('אור עקיבא');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Baqa al-Gharbiyye');
+VALUES ('אילת');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Bat Yam');
+VALUES ('אלעד');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Beersheba');
+VALUES ('אריאל');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Beit Shean');
+VALUES ('אשדוד');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Beit Shemesh');
+VALUES ('אשקלון');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Bnei Brak');
+VALUES ('באקה אל-גרבייה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Dimona');
+VALUES ('באר יעקב');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Eilat');
+VALUES ('באר שבע');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Elad');
+VALUES ('בית שאן');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Givat Shmuel');
+VALUES ('בית שמש');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Givatayim');
+VALUES ('ביתר עילית');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Hadera');
+VALUES ('בני ברק');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Haifa');
+VALUES ('בת ים');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Herzliya');
+VALUES ('גבעת שמואל');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Hod HaSharon');
+VALUES ('גבעתיים');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Holon');
+VALUES ('דימונה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Jerusalem');
+VALUES ('הוד השרון');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Kafr Qasim');
+VALUES ('הרצליה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Karmiel');
+VALUES ('חדרה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Kfar Saba');
+VALUES ('חולון');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Kfar Yona');
+VALUES ('חיפה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Kiryat Ata');
+VALUES ('טבריה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Kiryat Bialik');
+VALUES ('טייבה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Kiryat Gat');
+VALUES ('טירה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Kiryat Malakhi');
+VALUES ('טירת כרמל');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Kiryat Motzkin');
+VALUES ('טמרה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Kiryat Ono');
+VALUES ('יבנה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Kiryat Shmona');
+VALUES ('יהוד-מונוסון');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Kiryat Yam');
+VALUES ('יקנעם עילית');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Lod');
+VALUES ('ירושלים');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Maalot-Tarshiha');
+VALUES ('כפר יונה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Migdal HaEmek');
+VALUES ('כפר סבא');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Modiin-Maccabim-Reut');
+VALUES ('כפר קאסם');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Nahariya');
+VALUES ('כרמיאל');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Nazareth');
+VALUES ('לוד');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Nesher');
+VALUES ('מגדל העמק');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Ness Ziona');
+VALUES ('מודיעין עילית');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Netanya');
+VALUES ('מודיעין- מכבים- רעות');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Netivot');
+VALUES ('מעאר');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Nof HaGalil');
+VALUES ('מעלה אדומים');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Ofakim');
+VALUES ('מעלות-תרשיחא	');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Or Akiva');
+VALUES ('נהריה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Or Yehuda');
+VALUES ('נוף הגליל');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Petah Tikva');
+VALUES ('נס ציונה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Qalansawe');
+VALUES ('נצרת');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Raanana');
+VALUES ('נשר');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Rahat');
+VALUES ('נתיבות');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Ramat Gan');
+VALUES ('נתניה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Ramat HaSharon');
+VALUES ('סחנין');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Ramla');
+VALUES ('עכו');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Rehovot');
+VALUES ('עפולה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Rishon LeZion');
+VALUES ('עראבה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Rosh HaAyin');
+VALUES ('ערד');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Rehovot');
+VALUES ('פתח תקווה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Safed');
+VALUES ('צפת');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Sakhnin');
+VALUES ('קלנסווה');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Sderot');
+VALUES ('קריית אונו');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Shefa-Amr');
+VALUES ('קריית אתא');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Tamra');
+VALUES ('קריית ביאליק');
 
 INSERT INTO Branches([BranchLocation])
-VALUES ('Tayibe');
+VALUES ('קריית גת');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('קריית ים');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('קריית מוצקין');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('קריית מלאכי');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('קריית שמונה');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('ראש העין');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('ראשון לציון');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('רהט');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('רחובות');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('רמלה');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('רמת גן');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('רמת השרון');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('רעננה');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('שדרות');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('שפרעם');
+
+INSERT INTO Branches([BranchLocation])
+VALUES ('תל אביב יפו');
 
 Go
+
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('התנדבות עם בעלי חיים');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('עזרה לחקלאים');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('בריאות ורפואה');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('חלוקת סלי מזון');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('התנדבות עם בעלי צרכים מיוחדים');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('התנדבות במקלטים');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('עזרה בלימודים');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('איכות הסביבה');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('התנדבות בשעת חירום');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('ביטחון והצלה');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('חונכות והדרכה');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('אזרחים ותיקים');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('טכנולוגיה');
+
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('תרבות וספורט');
+
+
