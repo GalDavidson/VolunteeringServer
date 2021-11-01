@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VolunteeringServerBL.Models;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace VolunteeringServer.Controllers
 {
@@ -13,11 +15,35 @@ namespace VolunteeringServer.Controllers
     public class VolunteeringController : ControllerBase
     {
         #region Add connection to the db context using dependency injection
-        volunteeringDBContext context;
-        public VolunteeringController(volunteeringDBContext context)
+        VolunteeringDBContext context;
+        public VolunteeringController(VolunteeringDBContext context)
         {
             this.context = context;
         }
         #endregion
-    }
+
+        [Route("Login")]
+        [HttpGet]
+        public User Login([FromQuery] string email, [FromQuery] string pass)
+        {
+            User user = context.Login(email, pass);
+
+            //Check user name and password
+            if (user != null)
+            {
+                HttpContext.Session.SetObject("theUser", user);
+
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+
+                //Important! Due to the Lazy Loading, the user will be returned with all of its contects!!
+                return user;
+            }
+            else
+            {
+
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return null;
+            }
+        }
+    }   
 }
