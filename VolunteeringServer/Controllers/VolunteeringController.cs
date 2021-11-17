@@ -24,22 +24,19 @@ namespace VolunteeringServer.Controllers
 
         [Route("Login")]
         [HttpGet]
-        public User Login([FromQuery] string email, [FromQuery] string pass)
+        public Object Login([FromQuery] string email, [FromQuery] string pass)
         {
-            User user = context.Login(email, pass);
+            Object user = context.Login(email, pass);
 
             //Check user name and password
             if (user != null)
             {
                 HttpContext.Session.SetObject("theUser", user);
-
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-
                 return user;
             }
             else
             {
-
                 Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
                 return null;
             }

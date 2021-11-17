@@ -8,14 +8,16 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace VolunteeringServerBL.Models
 {
-    public partial class volunteeringDBContext : DbContext
+    public partial class VolunteeringDBContext : DbContext
     {
-        public Association LoginAssociation(string email, string pass)
+        public Object Login(string email, string pass)
         {
-            Association association = this.Users.Where(a => a.Email == email && a.Pass == pass).FirstOrDefault();
-            return association;
+            Object user = this.Associations.Where(a => a.Email == email && a.Pass == pass).FirstOrDefault();
+            if (user == null)
+            {
+                user = this.Volunteers.Where(v => v.Email == email && v.Pass == pass).FirstOrDefault();
+            }
+            return user;
         }
-
-        public Volunteer LoginVolunteer(string email, string pass)
     }
 }
