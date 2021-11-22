@@ -8,7 +8,7 @@ Go
 
 CREATE TABLE Gender(
     GenderID INT IDENTITY(1,1) PRIMARY KEY,
-    GenderType NVARCHAR NOT NULL
+    GenderType NVARCHAR(255) NOT NULL
 );
 
 
@@ -429,3 +429,12 @@ INSERT INTO OccupationalAreas([OccupationName])
 VALUES ('תרבות וספורט');
 
 
+INSERT INTO Gender([GenderType])
+VALUES ('female')
+
+INSERT INTO Gender([GenderType])
+VALUES ('male')
+
+
+INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[ProfilePic],[GenderID],[BirthDate])
+VALUES ('Noy','Ganor','noiganor12@gmail.com','Noyga','hoenyhoeny','https://static.wikia.nocookie.net/amazingrace/images/9/92/ILS7_NoyHadar.jpg/revision/latest?cb=20190630002928',1,'2004-08-24')
