@@ -45,7 +45,7 @@ namespace VolunteeringServer
             #region Add DB Context Support
             string connectionString = this.Configuration.GetConnectionString("ContactsDB");
 
-            services.AddDbContext<volunteeringDBContext>(options => options
+            services.AddDbContext<VolunteeringDBContext>(options => options
                                                                 .UseSqlServer(connectionString));
             //.UseLazyLoadingProxies());
             #endregion
