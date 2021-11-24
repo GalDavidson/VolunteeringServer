@@ -20,4 +20,17 @@ namespace VolunteeringServerBL.Models
             return user;
         }
     }
+
+    public partial class VolunteeringDBContext : DbContext
+    {
+        public Association RegisterAsso(string email, string userName, string infAbout, string phoneNum, string pass, string profilePic)
+        {
+            Object user = this.Associations.Where(a => a.Email == email && a.Pass == pass).FirstOrDefault();
+            if (user == null)
+            {
+                user = this.Volunteers.Where(v => v.Email == email && v.Pass == pass).FirstOrDefault();
+            }
+            return user;
+        }
+    }
 }

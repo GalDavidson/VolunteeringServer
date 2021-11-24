@@ -49,14 +49,14 @@ namespace VolunteeringServerBL.Models
             modelBuilder.Entity<AppAdmin>(entity =>
             {
                 entity.HasKey(e => e.AdminId)
-                    .HasName("PK__AppAdmin__719FE4E86E5419A5");
+                    .HasName("PK__AppAdmin__719FE4E86A125CBC");
 
                 entity.ToTable("AppAdmin");
 
-                entity.HasIndex(e => e.Email, "UQ__AppAdmin__A9D1053421DE9CE6")
+                entity.HasIndex(e => e.Email, "UQ__AppAdmin__A9D1053459D40665")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__AppAdmin__C9F2845633A5EC7C")
+                entity.HasIndex(e => e.UserName, "UQ__AppAdmin__C9F28456A68069C2")
                     .IsUnique();
 
                 entity.Property(e => e.AdminId).HasColumnName("AdminID");
@@ -80,10 +80,10 @@ namespace VolunteeringServerBL.Models
 
             modelBuilder.Entity<Association>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Associat__A9D10534C30D155D")
+                entity.HasIndex(e => e.Email, "UQ__Associat__A9D1053429C88463")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__Associat__C9F2845643884D86")
+                entity.HasIndex(e => e.UserName, "UQ__Associat__C9F28456FD81A24D")
                     .IsUnique();
 
                 entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
@@ -172,7 +172,7 @@ namespace VolunteeringServerBL.Models
             modelBuilder.Entity<DailyEvent>(entity =>
             {
                 entity.HasKey(e => e.EventId)
-                    .HasName("PK__DailyEve__7944C8700A28A859");
+                    .HasName("PK__DailyEve__7944C870C6E7A38B");
 
                 entity.Property(e => e.EventId).HasColumnName("EventID");
 
@@ -210,7 +210,7 @@ namespace VolunteeringServerBL.Models
 
                 entity.Property(e => e.GenderType)
                     .IsRequired()
-                    .HasMaxLength(1);
+                    .HasMaxLength(255);
             });
 
             modelBuilder.Entity<OccupationalArea>(entity =>
@@ -271,7 +271,7 @@ namespace VolunteeringServerBL.Models
             modelBuilder.Entity<PicturesOfEvent>(entity =>
             {
                 entity.HasKey(e => e.PicId)
-                    .HasName("PK__Pictures__B04A93E15E457702");
+                    .HasName("PK__Pictures__B04A93E180BBDB18");
 
                 entity.Property(e => e.PicId).HasColumnName("PicID");
 
@@ -291,7 +291,7 @@ namespace VolunteeringServerBL.Models
             modelBuilder.Entity<PicturesOfPost>(entity =>
             {
                 entity.HasKey(e => e.PicId)
-                    .HasName("PK__Pictures__B04A93E1801EEEB3");
+                    .HasName("PK__Pictures__B04A93E14AB24804");
 
                 entity.Property(e => e.PicId).HasColumnName("PicID");
 
@@ -337,10 +337,10 @@ namespace VolunteeringServerBL.Models
 
             modelBuilder.Entity<Volunteer>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Voluntee__A9D105344D8F9548")
+                entity.HasIndex(e => e.Email, "UQ__Voluntee__A9D10534B789E556")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__Voluntee__C9F28456D8334156")
+                entity.HasIndex(e => e.UserName, "UQ__Voluntee__C9F28456FBECC43A")
                     .IsUnique();
 
                 entity.Property(e => e.VolunteerId).HasColumnName("VolunteerID");

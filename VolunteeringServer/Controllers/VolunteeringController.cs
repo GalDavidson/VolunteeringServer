@@ -41,5 +41,23 @@ namespace VolunteeringServer.Controllers
                 return null;
             }
         }
+
+        [Route("RegisterAsso")]
+        [HttpPost]
+         
+        public Association RegisterAsso (Association a)
+        {
+            try
+            {
+                context.Associations.Add(a);
+                context.SaveChanges();
+                return a;
+            }
+
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
     }   
 }
