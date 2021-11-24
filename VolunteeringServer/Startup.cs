@@ -43,7 +43,7 @@ namespace VolunteeringServer
 
             //The following set the connection string to the DB and DB context!
             #region Add DB Context Support
-            string connectionString = this.Configuration.GetConnectionString("ContactsDB");
+            string connectionString = this.Configuration.GetConnectionString("volunteeringDB");
 
             services.AddDbContext<VolunteeringDBContext>(options => options
                                                                 .UseSqlServer(connectionString));

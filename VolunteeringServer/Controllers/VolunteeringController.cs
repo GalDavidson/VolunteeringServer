@@ -10,7 +10,7 @@ using System.IO;
 
 namespace VolunteeringServer.Controllers
 {
-    [Route("")]
+    [Route("VolunteeringAPI")]
     [ApiController]
     public class VolunteeringController : ControllerBase
     {
