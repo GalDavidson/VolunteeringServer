@@ -25,7 +25,7 @@ namespace VolunteeringServerBL.Models
     {
         public Association RegisterAsso(string email, string userName, string infAbout, string phoneNum, string pass, string profilePic)
         {
-            Object user = this.Associations.Where(a => a.Email == email && a.Pass == pass).FirstOrDefault();
+            Association a = new Association(email, userName, infAbout, phoneNum, pass, profilePic);
             if (user == null)
             {
                 user = this.Volunteers.Where(v => v.Email == email && v.Pass == pass).FirstOrDefault();
