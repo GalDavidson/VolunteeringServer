@@ -23,14 +23,20 @@ namespace VolunteeringServerBL.Models
 
     public partial class VolunteeringDBContext : DbContext
     {
-        public Association RegisterAsso(string email, string userName, string infAbout, string phoneNum, string pass, string profilePic)
+        public Association RegisterAsso(Association a)
         {
-            Association a = new Association(email, userName, infAbout, phoneNum, pass, profilePic);
-            if (user == null)
+            try
             {
-                user = this.Volunteers.Where(v => v.Email == email && v.Pass == pass).FirstOrDefault();
+                this.Associations.Add(a);
+                this.SaveChanges();
+                return a;
             }
-            return user;
+
+            catch (Exception e)
+            {
+                return null;
+            }
+
         }
     }
 }

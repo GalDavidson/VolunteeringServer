@@ -45,19 +45,22 @@ namespace VolunteeringServer.Controllers
         [Route("RegisterAsso")]
         [HttpPost]
          
-        public Association RegisterAsso (Association a)
+        public Association RegisterAsso ([FromBody] Association a)
         {
-            try
+            if (a != null)
             {
-                context.Associations.Add(a);
-                context.SaveChanges();
+                this.context.RegisterAsso(a);
+
+                HttpContext.Session.SetObject("theUser", a);
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
                 return a;
             }
-
-            catch (Exception e)
+            else
             {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
                 return null;
             }
+
         }
     }   
 }
