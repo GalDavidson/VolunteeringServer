@@ -19,10 +19,7 @@ namespace VolunteeringServerBL.Models
             }
             return user;
         }
-    }
 
-    public partial class VolunteeringDBContext : DbContext
-    {
         public Association RegisterAsso(Association a)
         {
             try
@@ -38,5 +35,24 @@ namespace VolunteeringServerBL.Models
             }
 
         }
+
+
+        public bool AddOccupationalArea(OccupationalArea area)
+        {
+            try
+            {
+                this.OccupationalAreas.Add(area);
+                this.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
     }
+
+
 }
