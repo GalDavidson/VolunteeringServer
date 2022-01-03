@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using VolunteeringServerBL.Models;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
+using VolunteeringServer.DTO;
 
 namespace VolunteeringServer.Controllers
 {
@@ -42,6 +43,31 @@ namespace VolunteeringServer.Controllers
             }
         }
 
+
+        [Route("GetLookups")]
+        [HttpGet]
+        public Lookups GetLookups()
+        {
+            try
+            {
+                Lookups obj = new Lookups()
+                {
+                    OccupationalAreas = context.OccupationalAreas.ToList(),
+                    Branches = context.Branches.ToList(),
+                    Genders = context.Genders.ToList(),
+                };
+
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                return obj;
+            }
+
+            catch
+            {
+                return null;
+            }
+        }
+
+
         [Route("RegisterAsso")]
         [HttpPost]
          
@@ -69,7 +95,7 @@ namespace VolunteeringServer.Controllers
 
         public async Task<IActionResult> UploadImage(IFormFile file)
         {
-            User user = HttpContext.Session.GetObject<User>("theUser");
+            Object user = HttpContext.Session.GetObject<Object>("theUser");
             //Check if user logged in and its ID is the same as the contact user ID
             if (user != null)
             {
