@@ -49,14 +49,14 @@ namespace VolunteeringServerBL.Models
             modelBuilder.Entity<AppAdmin>(entity =>
             {
                 entity.HasKey(e => e.AdminId)
-                    .HasName("PK__AppAdmin__719FE4E86A125CBC");
+                    .HasName("PK__AppAdmin__719FE4E853FE0CC4");
 
                 entity.ToTable("AppAdmin");
 
-                entity.HasIndex(e => e.Email, "UQ__AppAdmin__A9D1053459D40665")
+                entity.HasIndex(e => e.Email, "UQ__AppAdmin__A9D10534A94E3390")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__AppAdmin__C9F28456A68069C2")
+                entity.HasIndex(e => e.UserName, "UQ__AppAdmin__C9F28456E8528138")
                     .IsUnique();
 
                 entity.Property(e => e.AdminId).HasColumnName("AdminID");
@@ -80,10 +80,10 @@ namespace VolunteeringServerBL.Models
 
             modelBuilder.Entity<Association>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Associat__A9D1053429C88463")
+                entity.HasIndex(e => e.Email, "UQ__Associat__A9D10534032E597C")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__Associat__C9F28456FD81A24D")
+                entity.HasIndex(e => e.UserName, "UQ__Associat__C9F28456A6811661")
                     .IsUnique();
 
                 entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
@@ -105,10 +105,6 @@ namespace VolunteeringServerBL.Models
                     .HasMaxLength(255);
 
                 entity.Property(e => e.PhoneNum)
-                    .IsRequired()
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.ProfilePic)
                     .IsRequired()
                     .HasMaxLength(255);
 
@@ -141,13 +137,13 @@ namespace VolunteeringServerBL.Models
                     .WithMany(p => p.BranchesOfAssociations)
                     .HasForeignKey(d => d.AssociationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__BranchesO__Assoc__3C69FB99");
+                    .HasConstraintName("FK__BranchesO__Assoc__4E88ABD4");
 
                 entity.HasOne(d => d.Branch)
                     .WithMany(p => p.BranchesOfAssociations)
                     .HasForeignKey(d => d.BranchId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__BranchesO__Branc__3D5E1FD2");
+                    .HasConstraintName("FK__BranchesO__Branc__4F7CD00D");
             });
 
             modelBuilder.Entity<Comment>(entity =>
@@ -172,7 +168,7 @@ namespace VolunteeringServerBL.Models
             modelBuilder.Entity<DailyEvent>(entity =>
             {
                 entity.HasKey(e => e.EventId)
-                    .HasName("PK__DailyEve__7944C870C6E7A38B");
+                    .HasName("PK__DailyEve__7944C870C1DE5220");
 
                 entity.Property(e => e.EventId).HasColumnName("EventID");
 
@@ -199,7 +195,7 @@ namespace VolunteeringServerBL.Models
                 entity.HasOne(d => d.Association)
                     .WithMany(p => p.DailyEvents)
                     .HasForeignKey(d => d.AssociationId)
-                    .HasConstraintName("FK__DailyEven__Assoc__403A8C7D");
+                    .HasConstraintName("FK__DailyEven__Assoc__52593CB8");
             });
 
             modelBuilder.Entity<Gender>(entity =>
@@ -237,13 +233,13 @@ namespace VolunteeringServerBL.Models
                     .WithMany(p => p.OccupationalAreasOfAssociations)
                     .HasForeignKey(d => d.AssociationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Occupatio__Assoc__36B12243");
+                    .HasConstraintName("FK__Occupatio__Assoc__48CFD27E");
 
                 entity.HasOne(d => d.OccupationalArea)
                     .WithMany(p => p.OccupationalAreasOfAssociations)
                     .HasForeignKey(d => d.OccupationalAreaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Occupatio__Occup__37A5467C");
+                    .HasConstraintName("FK__Occupatio__Occup__49C3F6B7");
             });
 
             modelBuilder.Entity<OccupationalAreasOfPost>(entity =>
@@ -259,19 +255,19 @@ namespace VolunteeringServerBL.Models
                     .WithMany(p => p.OccupationalAreasOfPosts)
                     .HasForeignKey(d => d.OccupationalAreaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Occupatio__Occup__571DF1D5");
+                    .HasConstraintName("FK__Occupatio__Occup__693CA210");
 
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.OccupationalAreasOfPosts)
                     .HasForeignKey(d => d.PostId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Occupatio__PostI__5629CD9C");
+                    .HasConstraintName("FK__Occupatio__PostI__68487DD7");
             });
 
             modelBuilder.Entity<PicturesOfEvent>(entity =>
             {
                 entity.HasKey(e => e.PicId)
-                    .HasName("PK__Pictures__B04A93E180BBDB18");
+                    .HasName("PK__Pictures__B04A93E17EE32E3E");
 
                 entity.Property(e => e.PicId).HasColumnName("PicID");
 
@@ -285,13 +281,13 @@ namespace VolunteeringServerBL.Models
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.PicturesOfEvents)
                     .HasForeignKey(d => d.EventId)
-                    .HasConstraintName("FK__PicturesO__Event__48CFD27E");
+                    .HasConstraintName("FK__PicturesO__Event__5AEE82B9");
             });
 
             modelBuilder.Entity<PicturesOfPost>(entity =>
             {
                 entity.HasKey(e => e.PicId)
-                    .HasName("PK__Pictures__B04A93E14AB24804");
+                    .HasName("PK__Pictures__B04A93E17DC2AD51");
 
                 entity.Property(e => e.PicId).HasColumnName("PicID");
 
@@ -305,7 +301,7 @@ namespace VolunteeringServerBL.Models
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.PicturesOfPosts)
                     .HasForeignKey(d => d.PostId)
-                    .HasConstraintName("FK__PicturesO__PostI__534D60F1");
+                    .HasConstraintName("FK__PicturesO__PostI__656C112C");
             });
 
             modelBuilder.Entity<Post>(entity =>
@@ -327,20 +323,20 @@ namespace VolunteeringServerBL.Models
                 entity.HasOne(d => d.Association)
                     .WithMany(p => p.Posts)
                     .HasForeignKey(d => d.AssociationId)
-                    .HasConstraintName("FK__Posts__Associati__44FF419A");
+                    .HasConstraintName("FK__Posts__Associati__571DF1D5");
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.Posts)
                     .HasForeignKey(d => d.EventId)
-                    .HasConstraintName("FK__Posts__EventID__45F365D3");
+                    .HasConstraintName("FK__Posts__EventID__5812160E");
             });
 
             modelBuilder.Entity<Volunteer>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Voluntee__A9D10534B789E556")
+                entity.HasIndex(e => e.Email, "UQ__Voluntee__A9D10534CC9841F8")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__Voluntee__C9F28456FBECC43A")
+                entity.HasIndex(e => e.UserName, "UQ__Voluntee__C9F284568EFA2101")
                     .IsUnique();
 
                 entity.Property(e => e.VolunteerId).HasColumnName("VolunteerID");
@@ -371,10 +367,6 @@ namespace VolunteeringServerBL.Models
                     .IsRequired()
                     .HasMaxLength(255);
 
-                entity.Property(e => e.ProfilePic)
-                    .IsRequired()
-                    .HasMaxLength(255);
-
                 entity.Property(e => e.UserName)
                     .IsRequired()
                     .HasMaxLength(255);
@@ -382,7 +374,7 @@ namespace VolunteeringServerBL.Models
                 entity.HasOne(d => d.Gender)
                     .WithMany(p => p.Volunteers)
                     .HasForeignKey(d => d.GenderId)
-                    .HasConstraintName("FK__Volunteer__Gende__286302EC");
+                    .HasConstraintName("FK__Volunteer__Gende__3A81B327");
             });
 
             modelBuilder.Entity<VolunteersInEvent>(entity =>
@@ -404,13 +396,13 @@ namespace VolunteeringServerBL.Models
                     .WithMany(p => p.VolunteersInEvents)
                     .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Volunteer__Event__4BAC3F29");
+                    .HasConstraintName("FK__Volunteer__Event__5DCAEF64");
 
                 entity.HasOne(d => d.Volunteer)
                     .WithMany(p => p.VolunteersInEvents)
                     .HasForeignKey(d => d.VolunteerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Volunteer__Volun__4CA06362");
+                    .HasConstraintName("FK__Volunteer__Volun__5EBF139D");
             });
 
             OnModelCreatingPartial(modelBuilder);

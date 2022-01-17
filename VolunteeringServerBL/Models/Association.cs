@@ -22,7 +22,6 @@ namespace VolunteeringServerBL.Models
         public string PhoneNum { get; set; }
         public string Pass { get; set; }
         public DateTime? ActionDate { get; set; }
-        public string ProfilePic { get; set; }
 
         public virtual ICollection<BranchesOfAssociation> BranchesOfAssociations { get; set; }
         public virtual ICollection<DailyEvent> DailyEvents { get; set; }

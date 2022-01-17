@@ -18,7 +18,6 @@ namespace VolunteeringServerBL.Models
         public string Email { get; set; }
         public string UserName { get; set; }
         public string Pass { get; set; }
-        public string ProfilePic { get; set; }
         public int? GenderId { get; set; }
         public DateTime BirthDate { get; set; }
         public DateTime? ActionDate { get; set; }

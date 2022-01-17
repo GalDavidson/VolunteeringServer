@@ -31,6 +31,7 @@ namespace VolunteeringServerBL.Models
 
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
 

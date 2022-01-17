@@ -20,7 +20,6 @@ CREATE TABLE Volunteers(
 	Email NVARCHAR(255) NOT NULL UNIQUE,
     UserName NVARCHAR(255) NOT NULL UNIQUE,
     Pass NVARCHAR(255) NOT NULL,
-    ProfilePic NVARCHAR(255) NOT NULL,
 	GenderID INT FOREIGN KEY REFERENCES Gender (GenderID),
     BirthDate DATE NOT NULL,
     ActionDate DATETIME default GETDATE()
@@ -36,7 +35,6 @@ CREATE TABLE Associations(
     PhoneNum NVARCHAR(255) NOT NULL,
     Pass NVARCHAR(255) NOT NULL,
     ActionDate DATETIME default GETDATE(),
-	ProfilePic NVARCHAR(255) NOT NULL
 );
 
 
@@ -437,4 +435,4 @@ VALUES ('male')
 
 
 INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[ProfilePic],[GenderID],[BirthDate])
-VALUES ('Noy','Ganor','noiganor12@gmail.com','Noyga','hoenyhoeny','https://static.wikia.nocookie.net/amazingrace/images/9/92/ILS7_NoyHadar.jpg/revision/latest?cb=20190630002928',1,'2004-08-24')
+VALUES ('Noy','Ganor','noiganor12@gmail.com','Noyga','hoenyhoeny',1,'2004-08-24')
