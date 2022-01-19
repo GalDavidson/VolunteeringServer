@@ -434,5 +434,5 @@ INSERT INTO Gender([GenderType])
 VALUES ('male')
 
 
-INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[ProfilePic],[GenderID],[BirthDate])
+INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
 VALUES ('Noy','Ganor','noiganor12@gmail.com','Noyga','hoenyhoeny',1,'2004-08-24')
