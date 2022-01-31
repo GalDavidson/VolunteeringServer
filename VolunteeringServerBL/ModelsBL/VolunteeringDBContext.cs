@@ -24,7 +24,7 @@ namespace VolunteeringServerBL.Models
         {
             try
             {
-                this.Associations.Add(a);
+                this.Associations.Update(a);
                 this.SaveChanges();
                 return a;
             }
@@ -53,7 +53,20 @@ namespace VolunteeringServerBL.Models
             }
         }
 
+        public bool AddBranch(Branch b)
+        {
+            try
+            {
+                this.Branches.Add(b);
+                this.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
     }
-
-
 }

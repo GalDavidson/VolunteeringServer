@@ -147,5 +147,29 @@ namespace VolunteeringServer.Controllers
                 return false;
             }
         }
+
+
+        [Route("AddBranch")]
+        [HttpPost]
+        public bool AddB([FromBody] Branch branch)
+        {
+            if (branch != null)
+            {
+                bool added = this.context.AddBranch(branch);
+                if (added)
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                    return added;
+                }
+                else
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
+        }
     }   
 }
