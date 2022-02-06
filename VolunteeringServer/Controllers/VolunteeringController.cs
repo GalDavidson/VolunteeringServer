@@ -78,9 +78,30 @@ namespace VolunteeringServer.Controllers
             {
                 this.context.RegisterAsso(a);
 
-                HttpContext.Session.SetObject("theUser", a);
+                HttpContext.Session.SetObject("theAssociation", a);
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
                 return a;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return null;
+            }
+
+        }
+
+        [Route("RegisterVolunteer")]
+        [HttpPost]
+
+        public Volunteer RegisterVolunteer([FromBody] Volunteer v)
+        {
+            if (v != null)
+            {
+                this.context.RegisterVol(v);
+
+                HttpContext.Session.SetObject("theVolunteer", v);
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                return v;
             }
             else
             {

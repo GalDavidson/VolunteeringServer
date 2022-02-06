@@ -37,6 +37,23 @@ namespace VolunteeringServerBL.Models
 
         }
 
+        public Volunteer RegisterVol(Volunteer v)
+        {
+            try
+            {
+                this.Volunteers.Update(v);
+                this.SaveChanges();
+                return v;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+        }
+
 
         public bool AddOccupationalArea(OccupationalArea area)
         {
