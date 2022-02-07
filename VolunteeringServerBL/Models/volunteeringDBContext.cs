@@ -49,14 +49,14 @@ namespace VolunteeringServerBL.Models
             modelBuilder.Entity<AppAdmin>(entity =>
             {
                 entity.HasKey(e => e.AdminId)
-                    .HasName("PK__AppAdmin__719FE4E8C8AE439D");
+                    .HasName("PK__AppAdmin__719FE4E8E6187492");
 
                 entity.ToTable("AppAdmin");
 
-                entity.HasIndex(e => e.Email, "UQ__AppAdmin__A9D105349F4D7E53")
+                entity.HasIndex(e => e.Email, "UQ__AppAdmin__A9D10534EEACE109")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__AppAdmin__C9F28456F0143812")
+                entity.HasIndex(e => e.UserName, "UQ__AppAdmin__C9F284569132E97A")
                     .IsUnique();
 
                 entity.Property(e => e.AdminId).HasColumnName("AdminID");
@@ -80,10 +80,10 @@ namespace VolunteeringServerBL.Models
 
             modelBuilder.Entity<Association>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Associat__A9D10534899063C5")
+                entity.HasIndex(e => e.Email, "UQ__Associat__A9D10534FBD3B8C8")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__Associat__C9F284561A9F7561")
+                entity.HasIndex(e => e.UserName, "UQ__Associat__C9F28456F92A065E")
                     .IsUnique();
 
                 entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
@@ -168,7 +168,7 @@ namespace VolunteeringServerBL.Models
             modelBuilder.Entity<DailyEvent>(entity =>
             {
                 entity.HasKey(e => e.EventId)
-                    .HasName("PK__DailyEve__7944C87026979844");
+                    .HasName("PK__DailyEve__7944C8701001D7BF");
 
                 entity.Property(e => e.EventId).HasColumnName("EventID");
 
@@ -267,7 +267,7 @@ namespace VolunteeringServerBL.Models
             modelBuilder.Entity<PicturesOfEvent>(entity =>
             {
                 entity.HasKey(e => e.PicId)
-                    .HasName("PK__Pictures__B04A93E1D54F95BF");
+                    .HasName("PK__Pictures__B04A93E198B62221");
 
                 entity.Property(e => e.PicId).HasColumnName("PicID");
 
@@ -287,7 +287,7 @@ namespace VolunteeringServerBL.Models
             modelBuilder.Entity<PicturesOfPost>(entity =>
             {
                 entity.HasKey(e => e.PicId)
-                    .HasName("PK__Pictures__B04A93E11AE1E8F3");
+                    .HasName("PK__Pictures__B04A93E108825C8A");
 
                 entity.Property(e => e.PicId).HasColumnName("PicID");
 
@@ -333,10 +333,10 @@ namespace VolunteeringServerBL.Models
 
             modelBuilder.Entity<Volunteer>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Voluntee__A9D1053494D5EBA3")
+                entity.HasIndex(e => e.Email, "UQ__Voluntee__A9D105345CBB2A42")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__Voluntee__C9F2845602F6909C")
+                entity.HasIndex(e => e.UserName, "UQ__Voluntee__C9F28456F8BE04C0")
                     .IsUnique();
 
                 entity.Property(e => e.VolunteerId).HasColumnName("VolunteerID");

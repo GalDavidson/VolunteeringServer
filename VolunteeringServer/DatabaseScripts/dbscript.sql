@@ -428,10 +428,10 @@ VALUES ('תרבות וספורט');
 
 
 INSERT INTO Gender([GenderType])
-VALUES ('female')
+VALUES ('נקבה')
 
 INSERT INTO Gender([GenderType])
-VALUES ('male')
+VALUES ('זכר')
 
 
 INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
