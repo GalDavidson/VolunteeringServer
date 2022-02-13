@@ -17,6 +17,10 @@ namespace VolunteeringServerBL.Models
             {
                 user = this.Volunteers.Where(v => v.Email == email && v.Pass == pass).FirstOrDefault();
             }
+            if (user == null)
+            {
+                user = this.AppAdmins.Where(v => v.Email == email && v.Pass == pass).FirstOrDefault();
+            }
             return user;
         }
 
