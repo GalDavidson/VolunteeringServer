@@ -95,6 +95,32 @@ namespace VolunteeringServer.Controllers
             }
         }
 
+        [Route("GetAllVolunteers")]
+        [HttpGet]
+        public List<Volunteer> GetAllVolunteers()
+        {
+            try
+            {
+                AppAdmin user = HttpContext.Session.GetObject<AppAdmin>("theUser");
+                //Check if user logged in and its ID is the same as the contact user ID
+                if (user != null && user.AdminName != "")
+                {
+                    return context.Volunteers.ToList();
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+
         [Route("RegisterAsso")]
         [HttpPost]
          
