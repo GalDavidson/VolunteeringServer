@@ -58,6 +58,39 @@ namespace VolunteeringServerBL.Models
 
         }
 
+        public Association UpdateAsso(Association a)
+        {
+            try
+            {
+                this.Associations.Where(Association.AssociationID == a.AssociationId).Update
+                this.SaveChanges();
+                return a;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+        }
+
+        public Volunteer UpdateVol(Volunteer v)
+        {
+            try
+            {
+                this.Volunteers.Update(v);
+                this.SaveChanges();
+                return v;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+        }
 
         public bool AddOccupationalArea(OccupationalArea area)
         {
