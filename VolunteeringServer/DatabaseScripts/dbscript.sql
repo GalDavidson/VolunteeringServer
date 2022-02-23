@@ -436,3 +436,15 @@ VALUES ('זכר')
 
 INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
 VALUES ('Noy','Ganor','noiganor12@gmail.com','Noyga','hoenyhoeny',1,'2004-08-24')
+
+INSERT INTO AppAdmin([UserName],[Email],[Pass],[AdminName])
+VALUES ('gal','gal@gmail.com','12345','GalDavidson')
+
+INSERT INTO Associations([Email],[UserName],[InformationAbout],[PhoneNum],[Pass])
+VALUES ('a@gmail.com','aa123','sfbwrnb','0384756291','all12345')
+
+INSERT INTO Associations([Email],[UserName],[InformationAbout],[PhoneNum],[Pass])
+VALUES ('b@gmail.com','bbb123','afrbrwtb','0769758761','band12345')
+
+INSERT INTO Associations([Email],[UserName],[InformationAbout],[PhoneNum],[Pass])
+VALUES ('c@gmail.com','cc123','wrnwtrynb','0584936722','coke1234')
