@@ -74,7 +74,7 @@ namespace VolunteeringServer.Controllers
         {
             try
             {
-                AppAdmin user = HttpContext.Session.GetObject<AppAdmin>("theAdmin");
+                AppAdmin user = HttpContext.Session.GetObject<AppAdmin>("theUser");
                 //Check if user logged in and its ID is the same as the contact user ID
                 if (user != null && user.AdminName != "")
                 {
@@ -101,7 +101,7 @@ namespace VolunteeringServer.Controllers
         {
             try
             {
-                AppAdmin user = HttpContext.Session.GetObject<AppAdmin>("theAdmin");
+                AppAdmin user = HttpContext.Session.GetObject<AppAdmin>("theUser");
                 //Check if user logged in and its ID is the same as the contact user ID
                 if (user != null && user.AdminName != "")
                 {
