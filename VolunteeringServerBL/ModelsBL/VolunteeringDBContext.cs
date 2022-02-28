@@ -122,5 +122,35 @@ namespace VolunteeringServerBL.Models
             }
         }
 
+
+        public bool RemoveAsso(Association a)
+        {
+            try
+            {
+                this.Associations.Remove(a);
+                this.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public bool RemoveVol(Volunteer v)
+        {
+            try
+            {
+                this.Volunteers.Remove(v);
+                this.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
     }
 }

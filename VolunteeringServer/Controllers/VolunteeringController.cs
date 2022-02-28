@@ -220,7 +220,6 @@ namespace VolunteeringServer.Controllers
             }
         }
 
-
         [Route("AddBranch")]
         [HttpPost]
         public bool AddB([FromBody] Branch branch)
@@ -228,6 +227,53 @@ namespace VolunteeringServer.Controllers
             if (branch != null)
             {
                 bool added = this.context.AddBranch(branch);
+                if (added)
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                    return added;
+                }
+                else
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
+        }
+
+
+        [Route("RemoveAsso")]
+        [HttpPost]
+        public bool RemoveAssociation([FromBody] Association a)
+        {
+            if (a != null)
+            {
+                bool added = this.context.RemoveAsso(a);
+                if (added)
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                    return added;
+                }
+                else
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
+        }
+
+        [Route("RemoveVol")]
+        [HttpPost]
+        public bool RemoveVolunteer([FromBody] Volunteer v)
+        {
+            if (v != null)
+            {
+                bool added = this.context.RemoveVol(v);
                 if (added)
                 {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
