@@ -243,6 +243,28 @@ namespace VolunteeringServer.Controllers
             }
         }
 
+        [Route("AddGender")]
+        [HttpPost]
+        public bool AddG([FromBody] Gender gender)
+        {
+            if (gender != null)
+            {
+                bool added = this.context.AddGender(gender);
+                if (added)
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                    return added;
+                }
+                else
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
+        }
 
         [Route("RemoveAsso")]
         [HttpPost]

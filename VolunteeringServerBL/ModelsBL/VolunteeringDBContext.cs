@@ -122,6 +122,21 @@ namespace VolunteeringServerBL.Models
             }
         }
 
+        public bool AddGender(Gender g)
+        {
+            try
+            {
+                this.Genders.Add(g);
+                this.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
 
         public bool RemoveAsso(Association a)
         {
