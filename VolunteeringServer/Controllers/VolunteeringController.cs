@@ -55,6 +55,9 @@ namespace VolunteeringServer.Controllers
                     OccupationalAreas = context.OccupationalAreas.ToList(),
                     Branches = context.Branches.ToList(),
                     Genders = context.Genders.ToList(),
+                    Associations = context.Associations.ToList(),
+                    Volunteers = context.Volunteers.ToList(),
+                    Events = context.DailyEvents.ToList()
                 };
 
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
