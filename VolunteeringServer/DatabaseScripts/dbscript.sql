@@ -448,3 +448,9 @@ VALUES ('b@gmail.com','bbb123','afrbrwtb','0769758761','band12345')
 
 INSERT INTO Associations([Email],[UserName],[InformationAbout],[PhoneNum],[Pass])
 VALUES ('c@gmail.com','cc123','wrnwtrynb','0584936722','coke1234')
+
+INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
+VALUES ('Shiri','Yaffe','6363shiri@gmail.com','Shirile','joya2328',1,'2004-09-03')
+
+INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
+VALUES ('Shira','Yosov','shirayosov6@gmail.com','ShiraShira','pizzaNitza',1,'2004-04-04')
