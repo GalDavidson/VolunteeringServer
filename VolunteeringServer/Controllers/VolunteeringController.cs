@@ -43,6 +43,46 @@ namespace VolunteeringServer.Controllers
             }
         }
 
+        [Route("UpdateAssociation")]
+        [HttpPost]
+        public Association UpdateAsso([FromBody] Association user)
+        {
+            //If user is null the request is bad
+            if (user == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                return null;
+            }
+
+            Association currentUser = HttpContext.Session.GetObject<Association>("theUser");
+            //Check if user logged in and its ID is the same as the contact user ID
+            if (currentUser != null && currentUser.AssociationId == user.AssociationId)
+            {
+                Association updatedUser = context.UpdateUser(currentUser, user);
+
+                if (updatedUser == null)
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return null;
+                }
+
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                return updatedUser;
+
+                ////Now check if an image exist for the contact (photo). If not, set the default image!
+                //var sourcePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", DEFAULT_PHOTO);
+                //var targetPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", $"{user.Id}.jpg");
+                //System.IO.File.Copy(sourcePath, targetPath);
+
+                //return the contact with its new ID if that was a new contact
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return null;
+            }
+        }
+
 
         [Route("GetLookups")]
         [HttpGet]
@@ -57,7 +97,8 @@ namespace VolunteeringServer.Controllers
                     Genders = context.Genders.ToList(),
                     Associations = context.Associations.ToList(),
                     Volunteers = context.Volunteers.ToList(),
-                    Events = context.DailyEvents.ToList()
+                    Events = context.DailyEvents.ToList(),
+                    VolsInEvents = context.VolunteersInEvents.ToList()
                 };
 
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;

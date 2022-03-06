@@ -58,23 +58,28 @@ namespace VolunteeringServerBL.Models
 
         }
 
-        //public Association UpdateAsso(Association a)
-        //{
-        //    try
-        //    {
-        //        this.Associations.Where(Association.AssociationID == a.AssociationId).Update;
-        //        this.SaveChanges();
-        //        return a;
-        //    }
+        public Association UpdateAsso(Association user, Association updatedUser)
+        {
+            try
+            {
+                Association currentUser = this.Associations
+                .Where(a => a.AssociationId == user.AssociationId).FirstOrDefault();
 
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e.Message);
-        //        return null;
-        //    }
+                currentUser.Email = updatedUser.Email;
+                currentUser.UserName = updatedUser.UserName;
+                currentUser.InformationAbout = updatedUser.InformationAbout;
+                currentUser.Pass = updatedUser.Pass;
+                currentUser.PhoneNum = updatedUser.PhoneNum;
 
-        //}
-
+                this.SaveChanges();
+                return currentUser;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
         public Volunteer UpdateVol(Volunteer v)
         {
             try
