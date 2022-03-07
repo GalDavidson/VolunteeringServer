@@ -80,15 +80,24 @@ namespace VolunteeringServerBL.Models
                 return null;
             }
         }
-        public Volunteer UpdateVol(Volunteer v)
+        public Volunteer UpdateVol(Volunteer user, Volunteer updatedUser)
         {
             try
             {
-                this.Volunteers.Update(v);
-                this.SaveChanges();
-                return v;
-            }
+                Volunteer currentUser = this.Volunteers
+                .Where(a => a.VolunteerId == user.VolunteerId).FirstOrDefault();
 
+                currentUser.Email = updatedUser.Email;
+                currentUser.UserName = updatedUser.UserName;
+                currentUser.FName = updatedUser.LName;
+                currentUser.LName = updatedUser.LName;
+                currentUser.Pass = updatedUser.Pass;
+                currentUser.GenderId = updatedUser.GenderId;
+                currentUser.BirthDate = updatedUser.BirthDate;
+
+                this.SaveChanges();
+                return currentUser;
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);

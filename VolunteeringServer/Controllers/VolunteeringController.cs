@@ -58,7 +58,7 @@ namespace VolunteeringServer.Controllers
             //Check if user logged in and its ID is the same as the contact user ID
             if (currentUser != null && currentUser.AssociationId == user.AssociationId)
             {
-                Association updatedUser = context.UpdateUser(currentUser, user);
+                Association updatedUser = context.UpdateAsso(currentUser, user);
 
                 if (updatedUser == null)
                 {
@@ -68,13 +68,39 @@ namespace VolunteeringServer.Controllers
 
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
                 return updatedUser;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return null;
+            }
+        }
 
-                ////Now check if an image exist for the contact (photo). If not, set the default image!
-                //var sourcePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", DEFAULT_PHOTO);
-                //var targetPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", $"{user.Id}.jpg");
-                //System.IO.File.Copy(sourcePath, targetPath);
+        [Route("Updatevolunteer")]
+        [HttpPost]
+        public Volunteer UpdateVol([FromBody] Volunteer user)
+        {
+            //If user is null the request is bad
+            if (user == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                return null;
+            }
 
-                //return the contact with its new ID if that was a new contact
+            Volunteer currentUser = HttpContext.Session.GetObject<Volunteer>("theUser");
+            //Check if user logged in and its ID is the same as the contact user ID
+            if (currentUser != null && currentUser.VolunteerId == user.VolunteerId)
+            {
+                Volunteer updatedUser = context.UpdateVol(currentUser, user);
+
+                if (updatedUser == null)
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return null;
+                }
+
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                return updatedUser;
             }
             else
             {
@@ -316,11 +342,11 @@ namespace VolunteeringServer.Controllers
         {
             if (a != null)
             {
-                bool added = this.context.RemoveAsso(a);
-                if (added)
+                bool success = this.context.RemoveAsso(a);
+                if (success)
                 {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    return added;
+                    return success;
                 }
                 else
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
@@ -339,11 +365,11 @@ namespace VolunteeringServer.Controllers
         {
             if (v != null)
             {
-                bool added = this.context.RemoveVol(v);
-                if (added)
+                bool success = this.context.RemoveVol(v);
+                if (success)
                 {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    return added;
+                    return success;
                 }
                 else
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
