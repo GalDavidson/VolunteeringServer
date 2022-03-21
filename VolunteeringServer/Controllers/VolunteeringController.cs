@@ -76,7 +76,7 @@ namespace VolunteeringServer.Controllers
             }
         }
 
-        [Route("Updatevolunteer")]
+        [Route("UpdateVolunteer")]
         [HttpPost]
         public Volunteer UpdateVol([FromBody] Volunteer user)
         {
