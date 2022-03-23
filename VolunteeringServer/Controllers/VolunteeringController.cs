@@ -196,6 +196,7 @@ namespace VolunteeringServer.Controllers
          
         public Association RegisterAsso ([FromBody] Association a)
         {
+            HttpContext.Session.SetObject("theUser", a);
             if (a != null)
             {
                 this.context.RegisterAsso(a);
@@ -217,6 +218,7 @@ namespace VolunteeringServer.Controllers
 
         public Volunteer RegisterVolunteer([FromBody] Volunteer v)
         {
+            HttpContext.Session.SetObject("theUser", v);
             if (v != null)
             {
                 this.context.RegisterVol(v);
