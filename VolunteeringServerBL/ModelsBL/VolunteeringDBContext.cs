@@ -71,6 +71,36 @@ namespace VolunteeringServerBL.Models
                 currentUser.Pass = updatedUser.Pass;
                 currentUser.PhoneNum = updatedUser.PhoneNum;
 
+                DbSet<OccupationalAreasOfAssociation> occu = this.OccupationalAreasOfAssociations;
+                foreach(OccupationalAreasOfAssociation o in occu)
+                {
+                    if (o.AssociationId == user.AssociationId)
+                    {
+                        this.OccupationalAreasOfAssociations.Remove(o);
+                    }
+                }
+
+                ICollection<OccupationalAreasOfAssociation> occuAreas = updatedUser.OccupationalAreasOfAssociations;
+                foreach (OccupationalAreasOfAssociation o in occuAreas)
+                {
+                    this.OccupationalAreasOfAssociations.Update(o);
+                }
+
+                DbSet<BranchesOfAssociation> brn = this.BranchesOfAssociations;
+                foreach (BranchesOfAssociation b in brn)
+                {
+                    if (b.AssociationId == user.AssociationId)
+                    {
+                        this.BranchesOfAssociations.Remove(b);
+                    }
+                }
+
+                ICollection<BranchesOfAssociation> brAsso = updatedUser.BranchesOfAssociations;
+                foreach (BranchesOfAssociation b in brAsso)
+                {
+                    this.BranchesOfAssociations.Update(b);
+                }
+
                 this.SaveChanges();
                 return currentUser;
             }

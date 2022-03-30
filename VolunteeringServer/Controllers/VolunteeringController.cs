@@ -196,12 +196,11 @@ namespace VolunteeringServer.Controllers
          
         public Association RegisterAsso ([FromBody] Association a)
         {
-            HttpContext.Session.SetObject("theUser", a);
             if (a != null)
             {
                 this.context.RegisterAsso(a);
 
-                HttpContext.Session.SetObject("theAssociation", a);
+                HttpContext.Session.SetObject("theUser", a);
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
                 return a;
             }
@@ -218,12 +217,11 @@ namespace VolunteeringServer.Controllers
 
         public Volunteer RegisterVolunteer([FromBody] Volunteer v)
         {
-            HttpContext.Session.SetObject("theUser", v);
             if (v != null)
             {
                 this.context.RegisterVol(v);
 
-                HttpContext.Session.SetObject("theVolunteer", v);
+                HttpContext.Session.SetObject("theUser", v);
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
                 return v;
             }
@@ -233,6 +231,30 @@ namespace VolunteeringServer.Controllers
                 return null;
             }
 
+        }
+
+        [Route("AddNewPost")]
+        [HttpPost]
+
+        public Volunteer Add([FromBody] Post p)
+        {
+            if (p != null)
+            {
+                bool added = this.context.Posts.Add(p);
+                if (added)
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                    return added;
+                }
+                else
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
         }
 
         [Route("UploadImage")]
