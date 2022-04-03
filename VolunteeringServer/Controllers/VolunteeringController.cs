@@ -236,11 +236,11 @@ namespace VolunteeringServer.Controllers
         [Route("AddNewPost")]
         [HttpPost]
 
-        public Volunteer Add([FromBody] Post p)
+        public bool Add([FromBody] Post p)
         {
             if (p != null)
             {
-                bool added = this.context.Posts.Add(p);
+                bool added = this.context.AddPost(p);
                 if (added)
                 {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.OK;

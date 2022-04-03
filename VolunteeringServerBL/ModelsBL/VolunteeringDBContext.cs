@@ -12,7 +12,11 @@ namespace VolunteeringServerBL.Models
     {
         public Object Login(string email, string pass)
         {
-            Object user = this.Associations.Where(a => a.Email == email && a.Pass == pass).FirstOrDefault();
+            Object user = this.Associations.Where(a => a.Email == email && a.Pass == pass)
+                .Include(u => u.OccupationalAreasOfAssociations)
+                .Include(u => u.BranchesOfAssociations)
+                .Include(u => u.Posts)
+                .Include(u => u.DailyEvents).FirstOrDefault();
             if (user == null)
             {
                 user = this.Volunteers.Where(v => v.Email == email && v.Pass == pass).FirstOrDefault();
@@ -62,47 +66,55 @@ namespace VolunteeringServerBL.Models
         {
             try
             {
-                Association currentUser = this.Associations
-                .Where(a => a.AssociationId == user.AssociationId).FirstOrDefault();
+                this.ChangeTracker.Clear();
 
-                currentUser.Email = updatedUser.Email;
-                currentUser.UserName = updatedUser.UserName;
-                currentUser.InformationAbout = updatedUser.InformationAbout;
-                currentUser.Pass = updatedUser.Pass;
-                currentUser.PhoneNum = updatedUser.PhoneNum;
+                this.Entry(updatedUser).State = EntityState.Modified;
 
-                DbSet<OccupationalAreasOfAssociation> occu = this.OccupationalAreasOfAssociations;
-                foreach(OccupationalAreasOfAssociation o in occu)
+                ICollection<OccupationalAreasOfAssociation> occu = this.OccupationalAreasOfAssociations.Where(o => o.AssociationId == updatedUser.AssociationId).ToList();
+                //Loop through the DB records and check if any of them should be deleted
+                foreach (OccupationalAreasOfAssociation o in occu)
                 {
-                    if (o.AssociationId == user.AssociationId)
-                    {
-                        this.OccupationalAreasOfAssociations.Remove(o);
-                    }
+                    OccupationalAreasOfAssociation temp = updatedUser.OccupationalAreasOfAssociations.Where(a => a.OccupationalAreaId == o.OccupationalAreaId && a.AssociationId == o.AssociationId).FirstOrDefault();
+                    if (temp == null)
+                        this.Entry(o).State = EntityState.Deleted;
+                    else
+                        this.Entry(o).State = EntityState.Unchanged;
+
                 }
 
-                ICollection<OccupationalAreasOfAssociation> occuAreas = updatedUser.OccupationalAreasOfAssociations;
-                foreach (OccupationalAreasOfAssociation o in occuAreas)
+                //loop through the updated user records and check if they need to be added to the DB
+                foreach (OccupationalAreasOfAssociation o in updatedUser.OccupationalAreasOfAssociations)
                 {
-                    this.OccupationalAreasOfAssociations.Update(o);
+                    OccupationalAreasOfAssociation temp = occu.Where(a => a.OccupationalAreaId == o.OccupationalAreaId && a.AssociationId == o.AssociationId).FirstOrDefault();
+                    if (temp == null)
+                        this.Entry(o).State = EntityState.Added;
                 }
 
-                DbSet<BranchesOfAssociation> brn = this.BranchesOfAssociations;
-                foreach (BranchesOfAssociation b in brn)
+                //Branches
+                ICollection<BranchesOfAssociation> branches = this.BranchesOfAssociations.Where(o => o.AssociationId == updatedUser.AssociationId).ToList();
+                //Loop through the DB records and check if any of them should be deleted
+                foreach (BranchesOfAssociation b in branches)
                 {
-                    if (b.AssociationId == user.AssociationId)
-                    {
-                        this.BranchesOfAssociations.Remove(b);
-                    }
+                    BranchesOfAssociation temp = updatedUser.BranchesOfAssociations.Where(a => a.BranchId == b.BranchId && a.AssociationId == b.AssociationId).FirstOrDefault();
+                    if (temp == null)
+                        this.Entry(b).State = EntityState.Deleted;
+                    else
+                        this.Entry(b).State = EntityState.Unchanged;
+
                 }
 
-                ICollection<BranchesOfAssociation> brAsso = updatedUser.BranchesOfAssociations;
-                foreach (BranchesOfAssociation b in brAsso)
+                //loop through the updated user records and check if they need to be added to the DB
+                foreach (BranchesOfAssociation b in updatedUser.BranchesOfAssociations)
                 {
-                    this.BranchesOfAssociations.Update(b);
+                    BranchesOfAssociation temp = branches.Where(a => a.BranchId == a.BranchId && a.AssociationId == b.AssociationId).FirstOrDefault();
+                    if (temp == null)
+                        this.Entry(b).State = EntityState.Added;
                 }
 
                 this.SaveChanges();
-                return currentUser;
+
+                
+                return updatedUser;
             }
             catch (Exception e)
             {
@@ -114,19 +126,34 @@ namespace VolunteeringServerBL.Models
         {
             try
             {
-                Volunteer currentUser = this.Volunteers
-                .Where(a => a.VolunteerId == user.VolunteerId).FirstOrDefault();
+                this.ChangeTracker.Clear();
 
-                currentUser.Email = updatedUser.Email;
-                currentUser.UserName = updatedUser.UserName;
-                currentUser.FName = updatedUser.LName;
-                currentUser.LName = updatedUser.LName;
-                currentUser.Pass = updatedUser.Pass;
-                currentUser.GenderId = updatedUser.GenderId;
-                currentUser.BirthDate = updatedUser.BirthDate;
+                this.Entry(updatedUser).State = EntityState.Modified;
+
+                ICollection<OccupationalAreasOfAssociation> occu = this.OccupationalAreasOfAssociations.Where(o => o.AssociationId == updatedUser.AssociationId).ToList();
+                //Loop through the DB records and check if any of them should be deleted
+                foreach (OccupationalAreasOfAssociation o in occu)
+                {
+                    OccupationalAreasOfAssociation temp = updatedUser.OccupationalAreasOfAssociations.Where(a => a.OccupationalAreaId == o.OccupationalAreaId && a.AssociationId == o.AssociationId).FirstOrDefault();
+                    if (temp == null)
+                        this.Entry(o).State = EntityState.Deleted;
+                    else
+                        this.Entry(o).State = EntityState.Unchanged;
+
+                }
+
+                //loop through the updated user records and check if they need to be added to the DB
+                foreach (OccupationalAreasOfAssociation o in updatedUser.OccupationalAreasOfAssociations)
+                {
+                    OccupationalAreasOfAssociation temp = occu.Where(a => a.OccupationalAreaId == o.OccupationalAreaId && a.AssociationId == o.AssociationId).FirstOrDefault();
+                    if (temp == null)
+                        this.Entry(o).State = EntityState.Added;
+                }
 
                 this.SaveChanges();
-                return currentUser;
+
+
+                return updatedUser;
             }
             catch (Exception e)
             {
@@ -156,6 +183,21 @@ namespace VolunteeringServerBL.Models
             try
             {
                 this.Branches.Add(b);
+                this.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public bool AddPost(Post p)
+        {
+            try
+            {
+                this.Posts.Add(p);
                 this.SaveChanges();
                 return true;
             }
