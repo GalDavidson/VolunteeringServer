@@ -129,30 +129,9 @@ namespace VolunteeringServerBL.Models
                 this.ChangeTracker.Clear();
 
                 this.Entry(updatedUser).State = EntityState.Modified;
-
-                ICollection<OccupationalAreasOfAssociation> occu = this.OccupationalAreasOfAssociations.Where(o => o.AssociationId == updatedUser.AssociationId).ToList();
-                //Loop through the DB records and check if any of them should be deleted
-                foreach (OccupationalAreasOfAssociation o in occu)
-                {
-                    OccupationalAreasOfAssociation temp = updatedUser.OccupationalAreasOfAssociations.Where(a => a.OccupationalAreaId == o.OccupationalAreaId && a.AssociationId == o.AssociationId).FirstOrDefault();
-                    if (temp == null)
-                        this.Entry(o).State = EntityState.Deleted;
-                    else
-                        this.Entry(o).State = EntityState.Unchanged;
-
-                }
-
-                //loop through the updated user records and check if they need to be added to the DB
-                foreach (OccupationalAreasOfAssociation o in updatedUser.OccupationalAreasOfAssociations)
-                {
-                    OccupationalAreasOfAssociation temp = occu.Where(a => a.OccupationalAreaId == o.OccupationalAreaId && a.AssociationId == o.AssociationId).FirstOrDefault();
-                    if (temp == null)
-                        this.Entry(o).State = EntityState.Added;
-                }
-
+                user.GenderId = updatedUser.GenderId;
+                
                 this.SaveChanges();
-
-
                 return updatedUser;
             }
             catch (Exception e)
