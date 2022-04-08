@@ -19,7 +19,7 @@ namespace VolunteeringServerBL.Models
                 .Include(u => u.DailyEvents).FirstOrDefault();
             if (user == null)
             {
-                user = this.Volunteers.Where(v => v.Email == email && v.Pass == pass).FirstOrDefault();
+                user = this.Volunteers.Where(v => v.Email == email && v.Pass == pass).Include(g => g.Gender).FirstOrDefault();
             }
             if (user == null)
             {
