@@ -61,7 +61,6 @@ namespace VolunteeringServerBL.Models
             }
 
         }
-
         public Association UpdateAsso(Association user, Association updatedUser)
         {
             try
@@ -172,18 +171,27 @@ namespace VolunteeringServerBL.Models
             }
         }
 
-        public bool AddPost(Post p)
+        public Post AddPost(Post p, Association a)
         {
             try
             {
-                this.Posts.Add(p);
+                this.Posts.Update(p);
+
+                List<OccupationalAreasOfAssociation> lst = a.OccupationalAreasOfAssociations.ToList();
+                foreach (OccupationalAreasOfAssociation o in a.OccupationalAreasOfAssociations)
+                {
+                    OccupationalAreasOfAssociation temp = OccupationalAreasOfAssociations.Where(a => a.AssociationId == o.AssociationId && a.OccupationalAreaId == o.OccupationalAreaId).FirstOrDefault();
+                    if (temp == null)
+                        this.Entry(o).State = EntityState.Added;
+                }
+
                 this.SaveChanges();
-                return true;
+                return p;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return false;
+                return null;
             }
         }
 

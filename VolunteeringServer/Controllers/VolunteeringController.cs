@@ -236,24 +236,24 @@ namespace VolunteeringServer.Controllers
         [Route("AddNewPost")]
         [HttpPost]
 
-        public bool Add([FromBody] Post p)
+        public Post Add([FromBody] Post p)
         {
             if (p != null)
             {
-                bool added = this.context.AddPost(p);
-                if (added)
+                Post added = this.context.AddPost(p);
+                if (added != null)
                 {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
                     return added;
                 }
                 else
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return false;
+                return null;
             }
             else
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return false;
+                return null;
             }
         }
 
@@ -295,115 +295,148 @@ namespace VolunteeringServer.Controllers
         [HttpPost]
         public bool AddOccuArea([FromBody] OccupationalArea occupationalArea)
         {
-            if (occupationalArea != null)
+            Association user = HttpContext.Session.GetObject<Association>("theUser");
+            //Check if user logged in
+            if (user != null)
             {
-                bool added = this.context.AddOccupationalArea(occupationalArea);
-                if (added)
+
+                if (occupationalArea != null)
                 {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    return added;
+                    bool added = this.context.AddOccupationalArea(occupationalArea);
+                    if (added)
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                        return added;
+                    }
+                    else
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return false;
                 }
                 else
+                {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return false;
+                    return false;
+                }
             }
-            else
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return false;
-            }
+            return false;
         }
 
         [Route("AddBranch")]
         [HttpPost]
         public bool AddB([FromBody] Branch branch)
         {
-            if (branch != null)
+            Association user = HttpContext.Session.GetObject<Association>("theUser");
+            //Check if user logged in
+            if (user != null)
             {
-                bool added = this.context.AddBranch(branch);
-                if (added)
+
+                if (branch != null)
                 {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    return added;
+                    bool added = this.context.AddBranch(branch);
+                    if (added)
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                        return added;
+                    }
+                    else
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return false;
                 }
                 else
+                {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return false;
+                    return false;
+                }
             }
-            else
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return false;
-            }
+            return false;
         }
 
         [Route("AddGender")]
         [HttpPost]
         public bool AddG([FromBody] Gender gender)
         {
-            if (gender != null)
+            Volunteer user = HttpContext.Session.GetObject<Volunteer>("theUser");
+            //Check if user logged in
+            if (user != null)
             {
-                bool added = this.context.AddGender(gender);
-                if (added)
+
+                if (gender != null)
                 {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    return added;
+                    bool added = this.context.AddGender(gender);
+                    if (added)
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                        return added;
+                    }
+                    else
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return false;
                 }
                 else
+                {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return false;
+                    return false;
+                }
             }
-            else
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return false;
-            }
+            return false;
         }
 
         [Route("RemoveAsso")]
         [HttpPost]
         public bool RemoveAssociation([FromBody] Association a)
         {
-            if (a != null)
+            AppAdmin user = HttpContext.Session.GetObject<AppAdmin>("theUser");
+            //Check if user logged in and its name isn't null
+            if (user != null && user.AdminName != "")
             {
-                bool success = this.context.RemoveAsso(a);
-                if (success)
+                if (a != null)
                 {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    return success;
+                    bool success = this.context.RemoveAsso(a);
+                    if (success)
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                        return success;
+                    }
+                    else
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return false;
                 }
                 else
+                {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return false;
+                    return false;
+                }
             }
-            else
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return false;
-            }
+            return false;
         }
 
         [Route("RemoveVol")]
         [HttpPost]
         public bool RemoveVolunteer([FromBody] Volunteer v)
         {
-            if (v != null)
+            AppAdmin user = HttpContext.Session.GetObject<AppAdmin>("theUser");
+            //Check if user logged in and its name isn't null
+            if (user != null && user.AdminName != "")
             {
-                bool success = this.context.RemoveVol(v);
-                if (success)
+                if (v != null)
                 {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    return success;
+                    bool success = this.context.RemoveVol(v);
+                    if (success)
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                        return success;
+                    }
+                    else
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return false;
                 }
                 else
+                {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return false;
+                    return false;
+                }
             }
-            else
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return false;
-            }
+            return false;
         }
     }   
 }
