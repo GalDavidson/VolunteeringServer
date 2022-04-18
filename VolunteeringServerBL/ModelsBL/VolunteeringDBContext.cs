@@ -185,6 +185,8 @@ namespace VolunteeringServerBL.Models
                         this.Entry(o).State = EntityState.Added;
                 }
 
+
+
                 this.SaveChanges();
                 return p;
             }
