@@ -178,7 +178,7 @@ namespace VolunteeringServerBL.Models
                 this.Posts.Update(p);
 
                 List<OccupationalAreasOfAssociation> lst = a.OccupationalAreasOfAssociations.ToList();
-                foreach (OccupationalAreasOfAssociation o in a.OccupationalAreasOfAssociations)
+                foreach (OccupationalAreasOfAssociation o in lst)
                 {
                     OccupationalAreasOfAssociation temp = OccupationalAreasOfAssociations.Where(a => a.AssociationId == o.AssociationId && a.OccupationalAreaId == o.OccupationalAreaId).FirstOrDefault();
                     if (temp == null)

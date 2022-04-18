@@ -238,23 +238,29 @@ namespace VolunteeringServer.Controllers
 
         public Post Add([FromBody] Post p)
         {
-            if (p != null)
+            Association a = HttpContext.Session.GetObject<Association>("theUser");
+            //Check if user logged in and its ID is the same as the contact user ID
+            if (a != null)
             {
-                Post added = this.context.AddPost(p);
-                if (added != null)
+                if (p != null)
                 {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    return added;
+                    Post added = this.context.AddPost(p, a);
+                    if (added != null)
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                        return added;
+                    }
+                    else
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return null;
                 }
                 else
+                {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return null;
+                    return null;
+                }
             }
-            else
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return null;
-            }
+            return null;
         }
 
         [Route("UploadImage")]

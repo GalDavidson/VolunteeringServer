@@ -10,11 +10,13 @@ namespace VolunteeringServerBL.Models
         public OccupationalArea()
         {
             OccupationalAreasOfAssociations = new HashSet<OccupationalAreasOfAssociation>();
+            OccupationalAreasOfPosts = new HashSet<OccupationalAreasOfPost>();
         }
 
         public int OccupationalAreaId { get; set; }
         public string OccupationName { get; set; }
 
         public virtual ICollection<OccupationalAreasOfAssociation> OccupationalAreasOfAssociations { get; set; }
+        public virtual ICollection<OccupationalAreasOfPost> OccupationalAreasOfPosts { get; set; }
     }
 }

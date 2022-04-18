@@ -142,8 +142,6 @@ CREATE TABLE OccupationalAreasOfPosts(
 
 
 
-
-
 INSERT INTO Branches([BranchLocation])
 VALUES ('אום אל-פחם');
 

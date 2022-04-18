@@ -255,11 +255,11 @@ namespace VolunteeringServerBL.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Occupatio__Occup__693CA210");
 
-                entity.HasOne(d => d.Post)
+                entity.HasOne(d => d.OccupationalAreaNavigation)
                     .WithMany(p => p.OccupationalAreasOfPosts)
-                    .HasForeignKey(d => d.PostId)
+                    .HasForeignKey(d => d.OccupationalAreaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Occupatio__PostI__68487DD7");
+                    .HasConstraintName("FK__Occupatio__Occup__6E01572D");
             });
 
             modelBuilder.Entity<Post>(entity =>
