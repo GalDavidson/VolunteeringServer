@@ -136,7 +136,7 @@ CREATE TABLE PicturesOfPosts(
 
 CREATE TABLE OccupationalAreasOfPosts(
     PostID INT FOREIGN KEY REFERENCES Posts (PostID),
-    OccupationalAreaID INT FOREIGN KEY REFERENCES DailyEvents (EventID),
+    OccupationalAreaID INT FOREIGN KEY REFERENCES OccupationalAreas (OccupationalAreaID),
 	CONSTRAINT PK_OccuAreasPosts PRIMARY KEY (PostID, OccupationalAreaID)
 );
 
@@ -452,3 +452,6 @@ VALUES ('Shiri','Yaffe','6363shiri@gmail.com','Shirile','joya2328',1,'2004-09-03
 
 INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
 VALUES ('Shira','Yosov','shirayosov6@gmail.com','ShiraShira','pizzaNitza',1,'2004-04-04')
+
+
+--scaffold-dbcontext "Server=localhost\sqlexpress;Database=VolunteeringDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models –force

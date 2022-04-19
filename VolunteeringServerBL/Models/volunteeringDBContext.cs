@@ -253,13 +253,13 @@ namespace VolunteeringServerBL.Models
                     .WithMany(p => p.OccupationalAreasOfPosts)
                     .HasForeignKey(d => d.OccupationalAreaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Occupatio__Occup__693CA210");
+                    .HasConstraintName("FK__Occupatio__Occup__02084FDA");
 
-                entity.HasOne(d => d.OccupationalAreaNavigation)
+                entity.HasOne(d => d.Post)
                     .WithMany(p => p.OccupationalAreasOfPosts)
-                    .HasForeignKey(d => d.OccupationalAreaId)
+                    .HasForeignKey(d => d.PostId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Occupatio__Occup__6E01572D");
+                    .HasConstraintName("FK__Occupatio__PostI__01142BA1");
             });
 
             modelBuilder.Entity<Post>(entity =>

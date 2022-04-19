@@ -177,15 +177,20 @@ namespace VolunteeringServerBL.Models
             {
                 this.Posts.Update(p);
 
-                List<OccupationalAreasOfAssociation> lst = a.OccupationalAreasOfAssociations.ToList();
-                foreach (OccupationalAreasOfAssociation o in lst)
+                ICollection<OccupationalAreasOfPost> list = p.OccupationalAreasOfPosts.ToList();
+                foreach (OccupationalAreasOfPost o in list)
                 {
-                    OccupationalAreasOfAssociation temp = OccupationalAreasOfAssociations.Where(a => a.AssociationId == o.AssociationId && a.OccupationalAreaId == o.OccupationalAreaId).FirstOrDefault();
+                    OccupationalAreasOfAssociation temp = a.OccupationalAreasOfAssociations.Where(t => t.OccupationalAreaId == o.OccupationalAreaId).FirstOrDefault();
                     if (temp == null)
-                        this.Entry(o).State = EntityState.Added;
+                    {
+                        OccupationalAreasOfAssociation occ = new OccupationalAreasOfAssociation
+                        {
+                            AssociationId = a.AssociationId,
+                            OccupationalAreaId = o.OccupationalAreaId
+                        };
+                        this.OccupationalAreasOfAssociations.Add(occ);
+                    }
                 }
-
-
 
                 this.SaveChanges();
                 return p;
