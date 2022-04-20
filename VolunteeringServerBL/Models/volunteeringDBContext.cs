@@ -176,7 +176,7 @@ namespace VolunteeringServerBL.Models
 
                 entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
 
-                entity.Property(e => e.EventDate).HasColumnType("datetime");
+                entity.Property(e => e.EventDate).HasColumnType("date");
 
                 entity.Property(e => e.EventLocation)
                     .IsRequired()

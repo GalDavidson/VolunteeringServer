@@ -84,7 +84,9 @@ CREATE TABLE DailyEvents(
     AssociationID INT FOREIGN KEY REFERENCES Associations (AssociationID),
     ActionDate DATETIME default GETDATE(),
     EventName NVARCHAR(255) NOT NULL,
-    EventDate DATETIME NOT NULL
+    EventDate DATE NOT NULL,
+    StartTime TIME NOT NULL,
+    EndTime TIME NOT NULL
 );
 
 
@@ -93,7 +95,7 @@ CREATE TABLE Posts(
     ActionDate DATETIME default GETDATE(),
     Caption NVARCHAR(255) NOT NULL,
     AssociationID INT FOREIGN KEY REFERENCES Associations (AssociationID),
-	EventID INT FOREIGN KEY REFERENCES DailyEvents (EventID)
+	EventID INT UNIQUE FOREIGN KEY REFERENCES DailyEvents (EventID)
 );
 
 
