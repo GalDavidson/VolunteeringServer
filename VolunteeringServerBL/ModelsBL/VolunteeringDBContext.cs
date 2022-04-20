@@ -202,6 +202,23 @@ namespace VolunteeringServerBL.Models
             }
         }
 
+
+        public DailyEvent AddEvent(DailyEvent d)
+        {
+            try
+            {
+                this.DailyEvents.Update(d);
+
+                this.SaveChanges();
+                return d;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
         public bool AddGender(Gender g)
         {
             try

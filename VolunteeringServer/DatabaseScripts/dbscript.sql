@@ -81,7 +81,6 @@ CREATE TABLE BranchesOfAssociation(
 CREATE TABLE DailyEvents(
     EventID INT IDENTITY(1,1) PRIMARY KEY,
     EventLocation NVARCHAR(255) NOT NULL,
-    Caption NVARCHAR(255) NOT NULL,
     AssociationID INT FOREIGN KEY REFERENCES Associations (AssociationID),
     ActionDate DATETIME default GETDATE(),
     EventName NVARCHAR(255) NOT NULL,
@@ -95,14 +94,6 @@ CREATE TABLE Posts(
     Caption NVARCHAR(255) NOT NULL,
     AssociationID INT FOREIGN KEY REFERENCES Associations (AssociationID),
 	EventID INT FOREIGN KEY REFERENCES DailyEvents (EventID)
-);
-
-
-
-CREATE TABLE PicturesOfEvents(
-    PicID INT IDENTITY(1,1) PRIMARY KEY,
-    PicURL NVARCHAR(255) NOT NULL,
-    EventID INT FOREIGN KEY REFERENCES DailyEvents (EventID)
 );
 
 
@@ -124,12 +115,6 @@ CREATE TABLE Comments(
     EventID INT NOT NULL,
     VolunteerID INT NOT NULL,
 	CONSTRAINT FK_EventsComments FOREIGN KEY (EventID,VolunteerID) REFERENCES VolunteersInEvents(EventID,VolunteerID)
-);
-
-CREATE TABLE PicturesOfPosts(
-    PicID INT IDENTITY(1,1) PRIMARY KEY,
-    PicURL NVARCHAR(255) NOT NULL,
-    PostID INT FOREIGN KEY REFERENCES Posts (PostID)
 );
 
 

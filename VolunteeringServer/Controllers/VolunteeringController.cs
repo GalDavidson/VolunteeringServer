@@ -263,34 +263,34 @@ namespace VolunteeringServer.Controllers
             return null;
         }
 
-        //[Route("CreateNewEvent")]
-        //[HttpPost]
-        //public DailyEvent NewEvent([FromBody] DailyEvent e)
-        //{
-        //    Association a = HttpContext.Session.GetObject<Association>("theUser");
-        //    //Check if user logged in
-        //    if (a != null)
-        //    {
-        //        if (p != null)
-        //        {
-        //            Post added = this.context.AddPost(p, a);
-        //            if (added != null)
-        //            {
-        //                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-        //                return added;
-        //            }
-        //            else
-        //                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-        //            return null;
-        //        }
-        //        else
-        //        {
-        //            Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-        //            return null;
-        //        }
-        //    }
-        //    return null;
-        //}
+        [Route("CreateNewEvent")]
+        [HttpPost]
+        public DailyEvent NewEvent([FromBody] DailyEvent e)
+        {
+            Association a = HttpContext.Session.GetObject<Association>("theUser");
+            //Check if user logged in
+            if (a != null)
+            {
+                if (e != null)
+                {
+                    DailyEvent added = this.context.AddEvent(e);
+                    if (added != null)
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                        return added;
+                    }
+                    else
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return null;
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return null;
+                }
+            }
+            return null;
+        }
 
 
         [Route("UploadImage")]
