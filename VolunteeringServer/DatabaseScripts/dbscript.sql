@@ -83,6 +83,7 @@ CREATE TABLE DailyEvents(
     EventLocation NVARCHAR(255) NOT NULL,
     AssociationID INT FOREIGN KEY REFERENCES Associations (AssociationID),
     ActionDate DATETIME default GETDATE(),
+    Caption NVARCHAR(255) NOT NULL,
     EventName NVARCHAR(255) NOT NULL,
     EventDate DATE NOT NULL,
     StartTime TIME NOT NULL,
@@ -90,14 +91,11 @@ CREATE TABLE DailyEvents(
 );
 
 
-CREATE TABLE Posts(
-    PostID INT IDENTITY(1,1) PRIMARY KEY,
-    ActionDate DATETIME default GETDATE(),
-    Caption NVARCHAR(255) NOT NULL,
-    AssociationID INT FOREIGN KEY REFERENCES Associations (AssociationID),
-	EventID INT UNIQUE FOREIGN KEY REFERENCES DailyEvents (EventID)
+CREATE TABLE OccupationalAreasOfEvents(
+    EventID INT FOREIGN KEY REFERENCES DailyEvents (EventID),
+    OccupationalAreaID INT FOREIGN KEY REFERENCES OccupationalAreas (OccupationalAreaID),
+	CONSTRAINT PK_OccuAreasEvents PRIMARY KEY (EventID, OccupationalAreaID)
 );
-
 
 
 CREATE TABLE VolunteersInEvents(
@@ -119,13 +117,6 @@ CREATE TABLE Comments(
 	CONSTRAINT FK_EventsComments FOREIGN KEY (EventID,VolunteerID) REFERENCES VolunteersInEvents(EventID,VolunteerID)
 );
 
-
-
-CREATE TABLE OccupationalAreasOfPosts(
-    PostID INT FOREIGN KEY REFERENCES Posts (PostID),
-    OccupationalAreaID INT FOREIGN KEY REFERENCES OccupationalAreas (OccupationalAreaID),
-	CONSTRAINT PK_OccuAreasPosts PRIMARY KEY (PostID, OccupationalAreaID)
-);
 
 
 

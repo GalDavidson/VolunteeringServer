@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace VolunteeringServerBL.Models
 {
-    public partial class OccupationalAreasOfPost
+    public partial class OccupationalAreasOfEvent
     {
-        public int PostId { get; set; }
+        public int EventId { get; set; }
         public int OccupationalAreaId { get; set; }
 
+        public virtual DailyEvent Event { get; set; }
         public virtual OccupationalArea OccupationalArea { get; set; }
-        public virtual Post Post { get; set; }
     }
 }

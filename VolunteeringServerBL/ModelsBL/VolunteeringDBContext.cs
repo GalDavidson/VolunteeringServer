@@ -171,14 +171,14 @@ namespace VolunteeringServerBL.Models
             }
         }
 
-        public Post AddPost(Post p, Association a)
+        public DailyEvent AddEvent(DailyEvent d, Association a)
         {
             try
             {
-                this.Posts.Update(p);
+                this.DailyEvents.Update(d);
 
-                ICollection<OccupationalAreasOfPost> list = p.OccupationalAreasOfPosts.ToList();
-                foreach (OccupationalAreasOfPost o in list)
+                ICollection<OccupationalAreasOfEvent> list = d.OccupationalAreasOfEvents.ToList();
+                foreach (OccupationalAreasOfEvent o in list)
                 {
                     OccupationalAreasOfAssociation temp = a.OccupationalAreasOfAssociations.Where(t => t.OccupationalAreaId == o.OccupationalAreaId).FirstOrDefault();
                     if (temp == null)
@@ -191,24 +191,6 @@ namespace VolunteeringServerBL.Models
                         this.OccupationalAreasOfAssociations.Add(occ);
                     }
                 }
-
-                this.SaveChanges();
-                return p;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-        }
-
-
-        public DailyEvent AddEvent(DailyEvent d)
-        {
-            try
-            {
-                this.DailyEvents.Update(d);
-
                 this.SaveChanges();
                 return d;
             }

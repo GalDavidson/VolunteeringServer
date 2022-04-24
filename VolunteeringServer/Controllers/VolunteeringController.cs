@@ -121,8 +121,8 @@ namespace VolunteeringServer.Controllers
                     OccupationalAreas = context.OccupationalAreas.ToList(),
                     Branches = context.Branches.ToList(),
                     Genders = context.Genders.ToList(),
-                    Associations = context.Associations.ToList(),
                     Volunteers = context.Volunteers.ToList(),
+                    Associations = context.Associations.ToList(),
                     Events = context.DailyEvents.ToList(),
                     VolsInEvents = context.VolunteersInEvents.ToList()
                 };
@@ -233,35 +233,7 @@ namespace VolunteeringServer.Controllers
 
         }
 
-        [Route("AddNewPost")]
-        [HttpPost]
-
-        public Post Add([FromBody] Post p)
-        {
-            Association a = HttpContext.Session.GetObject<Association>("theUser");
-            //Check if user logged in
-            if (a != null)
-            {
-                if (p != null)
-                {
-                    Post added = this.context.AddPost(p, a);
-                    if (added != null)
-                    {
-                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                        return added;
-                    }
-                    else
-                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                    return null;
-                }
-                else
-                {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                    return null;
-                }
-            }
-            return null;
-        }
+      
 
         [Route("CreateNewEvent")]
         [HttpPost]
@@ -273,7 +245,7 @@ namespace VolunteeringServer.Controllers
             {
                 if (e != null)
                 {
-                    DailyEvent added = this.context.AddEvent(e);
+                    DailyEvent added = this.context.AddEvent(e, a);
                     if (added != null)
                     {
                         Response.StatusCode = (int)System.Net.HttpStatusCode.OK;

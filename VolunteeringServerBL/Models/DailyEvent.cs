@@ -9,6 +9,7 @@ namespace VolunteeringServerBL.Models
     {
         public DailyEvent()
         {
+            OccupationalAreasOfEvents = new HashSet<OccupationalAreasOfEvent>();
             VolunteersInEvents = new HashSet<VolunteersInEvent>();
         }
 
@@ -17,12 +18,13 @@ namespace VolunteeringServerBL.Models
         public int? AssociationId { get; set; }
         public DateTime? ActionDate { get; set; }
         public string EventName { get; set; }
-        public DateTime? EventDate { get; set; }
-        public TimeSpan? StartTime { get; set; }
-        public TimeSpan? EndTime { get; set; }
+        public DateTime EventDate { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
+        public string Caption { get; set; }
 
         public virtual Association Association { get; set; }
-        public virtual Post Post { get; set; }
+        public virtual ICollection<OccupationalAreasOfEvent> OccupationalAreasOfEvents { get; set; }
         public virtual ICollection<VolunteersInEvent> VolunteersInEvents { get; set; }
     }
 }
