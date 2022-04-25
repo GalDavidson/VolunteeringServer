@@ -13,7 +13,6 @@ namespace VolunteeringServer.DTO
         public List<Gender> Genders { get; set; }
         public List<Volunteer> Volunteers { get; set; }
         public List<Association> Associations { get; set; }
-        public List<Post> Posts { get; set; }
         public List<DailyEvent> Events { get; set; }
         public List<VolunteersInEvent> VolsInEvents { get; set; }
 

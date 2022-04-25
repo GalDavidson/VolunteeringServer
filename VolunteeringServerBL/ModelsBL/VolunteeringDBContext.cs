@@ -15,7 +15,6 @@ namespace VolunteeringServerBL.Models
             Object user = this.Associations.Where(a => a.Email == email && a.Pass == pass)
                 .Include(u => u.OccupationalAreasOfAssociations)
                 .Include(u => u.BranchesOfAssociations)
-                .Include(u => u.Posts)
                 .Include(u => u.DailyEvents).FirstOrDefault();
             if (user == null)
             {

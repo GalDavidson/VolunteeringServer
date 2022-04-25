@@ -431,5 +431,13 @@ VALUES ('Shiri','Yaffe','6363shiri@gmail.com','Shirile','joya2328',1,'2004-09-03
 INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
 VALUES ('Shira','Yosov','shirayosov6@gmail.com','ShiraShira','pizzaNitza',1,'2004-04-04')
 
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime)
+VALUES ('חיפה', 1 ,'בואו יהיה כיף', 'טיפול בחזירי בר', '2022-4-27', '17:00','19:00')
+
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime)
+VALUES ('כפר סבא', 2 ,'!!! יהיו אוכל ושתייה בחינם', 'התנדבות בבית אבות', '2022-5-1', '11:00','15:30')
+
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime)
+VALUES ('אור עקיבא', 1 ,'מצווה חשובה במיוחד', 'חלוקת סלי מזון וביקור קשישים', '2022-4-30', '9:00','12:00')
 
 --scaffold-dbcontext "Server=localhost\sqlexpress;Database=VolunteeringDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models –force
