@@ -87,7 +87,8 @@ CREATE TABLE DailyEvents(
     EventName NVARCHAR(255) NOT NULL,
     EventDate DATE NOT NULL,
     StartTime TIME NOT NULL,
-    EndTime TIME NOT NULL
+    EndTime TIME NOT NULL,
+	RegionID INT FOREIGN KEY REFERENCES Regions (RegionId)
 );
 
 
@@ -117,8 +118,13 @@ CREATE TABLE Comments(
 	CONSTRAINT FK_EventsComments FOREIGN KEY (EventID,VolunteerID) REFERENCES VolunteersInEvents(EventID,VolunteerID)
 );
 
+CREATE TABLE Regions(
+    RegionID INT IDENTITY(1,1) PRIMARY KEY,
+    RegionName NVARCHAR(255) NOT NULL
+);
 
-
+Alter table DailyEvents
+ADD FOREIGN KEY (RegionID) REFERENCES Regions(RegionID);
 
 INSERT INTO Branches([BranchLocation])
 VALUES ('אום אל-פחם');
@@ -439,5 +445,8 @@ VALUES ('כפר סבא', 2 ,'!!! יהיו אוכל ושתייה בחינם', 'ה
 
 INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime)
 VALUES ('אור עקיבא', 1 ,'מצווה חשובה במיוחד', 'חלוקת סלי מזון וביקור קשישים', '2022-4-30', '9:00','12:00')
+
+
+
 
 --scaffold-dbcontext "Server=localhost\sqlexpress;Database=VolunteeringDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models –force
