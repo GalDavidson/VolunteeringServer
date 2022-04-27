@@ -78,6 +78,11 @@ CREATE TABLE BranchesOfAssociation(
 );
 
 
+CREATE TABLE Regions(
+    RegionID INT IDENTITY(1,1) PRIMARY KEY,
+    RegionName NVARCHAR(255) NOT NULL
+);
+
 CREATE TABLE DailyEvents(
     EventID INT IDENTITY(1,1) PRIMARY KEY,
     EventLocation NVARCHAR(255) NOT NULL,
@@ -118,13 +123,6 @@ CREATE TABLE Comments(
 	CONSTRAINT FK_EventsComments FOREIGN KEY (EventID,VolunteerID) REFERENCES VolunteersInEvents(EventID,VolunteerID)
 );
 
-CREATE TABLE Regions(
-    RegionID INT IDENTITY(1,1) PRIMARY KEY,
-    RegionName NVARCHAR(255) NOT NULL
-);
-
-Alter table DailyEvents
-ADD FOREIGN KEY (RegionID) REFERENCES Regions(RegionID);
 
 INSERT INTO Branches([BranchLocation])
 VALUES ('אום אל-פחם');
