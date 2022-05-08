@@ -120,6 +120,7 @@ namespace VolunteeringServer.Controllers
                 {
                     OccupationalAreas = context.OccupationalAreas.ToList(),
                     Branches = context.Branches.ToList(),
+                    Areas = context.Areas.ToList(),
                     Genders = context.Genders.ToList(),
                     Volunteers = context.Volunteers.ToList(),
                     Associations = context.Associations.ToList(),

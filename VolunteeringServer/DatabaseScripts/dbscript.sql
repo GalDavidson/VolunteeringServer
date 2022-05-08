@@ -78,9 +78,9 @@ CREATE TABLE BranchesOfAssociation(
 );
 
 
-CREATE TABLE Regions(
-    RegionID INT IDENTITY(1,1) PRIMARY KEY,
-    RegionName NVARCHAR(255) NOT NULL
+CREATE TABLE Areas(
+    AreaID INT IDENTITY(1,1) PRIMARY KEY,
+    AreaName NVARCHAR(255) NOT NULL
 );
 
 CREATE TABLE DailyEvents(
@@ -93,7 +93,7 @@ CREATE TABLE DailyEvents(
     EventDate DATE NOT NULL,
     StartTime TIME NOT NULL,
     EndTime TIME NOT NULL,
-	RegionID INT FOREIGN KEY REFERENCES Regions (RegionId)
+	AreaID INT FOREIGN KEY REFERENCES Areas (AreaID)
 );
 
 
@@ -413,6 +413,39 @@ VALUES ('נקבה')
 INSERT INTO Gender([GenderType])
 VALUES ('זכר')
 
+Go
+
+INSERT INTO Areas(AreaName)
+VALUES ('גולן')
+
+INSERT INTO Areas(AreaName)
+VALUES ('גליל')
+
+INSERT INTO Areas(AreaName)
+VALUES ('העמקים')
+
+INSERT INTO Areas(AreaName)
+VALUES ('כרמל')
+
+INSERT INTO Areas(AreaName)
+VALUES ('יהודה ושומרון')
+
+INSERT INTO Areas(AreaName)
+VALUES ('שרון')
+
+INSERT INTO Areas(AreaName)
+VALUES ('שפלה')
+
+INSERT INTO Areas(AreaName)
+VALUES ('ירושלים')
+
+INSERT INTO Areas(AreaName)
+VALUES ('הנגב')
+
+INSERT INTO Areas(AreaName)
+VALUES ('הערבה')
+
+Go
 
 INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
 VALUES ('Noy','Ganor','noiganor12@gmail.com','Noyga','hoenyhoeny',1,'2004-08-24')
@@ -435,14 +468,14 @@ VALUES ('Shiri','Yaffe','6363shiri@gmail.com','Shirile','joya2328',1,'2004-09-03
 INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
 VALUES ('Shira','Yosov','shirayosov6@gmail.com','ShiraShira','pizzaNitza',1,'2004-04-04')
 
-INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime)
-VALUES ('חיפה', 1 ,'בואו יהיה כיף', 'טיפול בחזירי בר', '2022-4-27', '17:00','19:00')
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime, areaID)
+VALUES ('חיפה', 1 ,'בואו יהיה כיף', 'טיפול בחזירי בר', '2022-4-27', '17:00','19:00', 4)
 
-INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime)
-VALUES ('כפר סבא', 2 ,'!!! יהיו אוכל ושתייה בחינם', 'התנדבות בבית אבות', '2022-5-1', '11:00','15:30')
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime, areaID)
+VALUES ('כפר סבא', 2 ,'!!! יהיו אוכל ושתייה בחינם', 'התנדבות בבית אבות', '2022-5-1', '11:00','15:30', 6)
 
-INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime)
-VALUES ('אור עקיבא', 1 ,'מצווה חשובה במיוחד', 'חלוקת סלי מזון וביקור קשישים', '2022-4-30', '9:00','12:00')
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime, areaID)
+VALUES ('אור עקיבא', 1 ,'מצווה חשובה במיוחד', 'חלוקת סלי מזון וביקור קשישים', '2022-4-30', '9:00','12:00', 4)
 
 
 

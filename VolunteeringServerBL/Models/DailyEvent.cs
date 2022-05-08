@@ -22,10 +22,10 @@ namespace VolunteeringServerBL.Models
         public DateTime EventDate { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
-        public int? RegionId { get; set; }
+        public int? AreaId { get; set; }
 
+        public virtual Area Area { get; set; }
         public virtual Association Association { get; set; }
-        public virtual Region Region { get; set; }
         public virtual ICollection<OccupationalAreasOfEvent> OccupationalAreasOfEvents { get; set; }
         public virtual ICollection<VolunteersInEvent> VolunteersInEvents { get; set; }
     }
