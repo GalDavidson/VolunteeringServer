@@ -234,7 +234,6 @@ namespace VolunteeringServer.Controllers
 
         }
 
-      
 
         [Route("CreateNewEvent")]
         [HttpPost]
