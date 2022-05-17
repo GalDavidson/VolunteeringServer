@@ -124,7 +124,7 @@ namespace VolunteeringServer.Controllers
                     Genders = context.Genders.ToList(),
                     Volunteers = context.Volunteers.ToList(),
                     Associations = context.Associations.ToList(),
-                    Events = context.DailyEvents.ToList(),
+                    Events = context.DailyEvents.Include(u => u.OccupationalAreasOfEvents).ToList(),
                     VolsInEvents = context.VolunteersInEvents.ToList()
                 };
 

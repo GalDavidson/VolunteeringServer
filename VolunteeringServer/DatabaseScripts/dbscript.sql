@@ -477,7 +477,35 @@ VALUES ('כפר סבא', 2 ,'!!! יהיו אוכל ושתייה בחינם', 'ה
 INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime, AreaID)
 VALUES ('אור עקיבא', 1 ,'מצווה חשובה במיוחד', 'חלוקת סלי מזון וביקור קשישים', '2022-4-30', '9:00','12:00', 4)
 
+INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
+VALUES (1,1)
 
+INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
+VALUES (1,4)
+
+INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
+VALUES (1,12)
+
+INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
+VALUES (2,12)
+
+INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
+VALUES (3,10)
+
+INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
+VALUES (3,14)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (1,1)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (2,12)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (3,4)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (3,12)
 
 
 --scaffold-dbcontext "Server=localhost\sqlexpress;Database=VolunteeringDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models –force
