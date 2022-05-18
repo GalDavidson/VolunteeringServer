@@ -60,6 +60,24 @@ namespace VolunteeringServerBL.Models
             }
 
         }
+
+        public VolunteersInEvent AddVolInEvent(VolunteersInEvent v)
+        {
+            try
+            {
+                this.VolunteersInEvents.Update(v);
+                this.SaveChanges();
+                return v;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+
+        }
+
         public Association UpdateAsso(Association user, Association updatedUser)
         {
             try

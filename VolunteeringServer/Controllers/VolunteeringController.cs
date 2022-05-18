@@ -234,6 +234,27 @@ namespace VolunteeringServer.Controllers
 
         }
 
+        [Route("AddNewVolInEvent")]
+        [HttpPost]
+
+        public VolunteersInEvent AddVolInEvent([FromBody] VolunteersInEvent v)
+        {
+            if (v != null)
+            {
+                this.context.AddVolInEvent(v);
+
+                HttpContext.Session.SetObject("theUser", v);
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                return v;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return null;
+            }
+
+        }
+
 
         [Route("CreateNewEvent")]
         [HttpPost]
