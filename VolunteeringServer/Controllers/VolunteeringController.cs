@@ -239,20 +239,35 @@ namespace VolunteeringServer.Controllers
 
         public VolunteersInEvent AddVolInEvent([FromBody] VolunteersInEvent v)
         {
-            if (v != null)
+            Volunteer vol = HttpContext.Session.GetObject<Volunteer>("theUser");
+            //Check if user logged in and its name isn't null
+            if (vol != null && vol.FName != "")
             {
-                this.context.AddVolInEvent(v);
-
-                HttpContext.Session.SetObject("theUser", v);
-                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                return v;
-            }
+                if (v != null)
+                {
+                    VolunteersInEvent volInEvent = context.AddVolInEvent(v);
+                    if (volInEvent != null)
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                        return volInEvent;
+                    }
+                    else
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                        return null;
+                    }
+                }
+                else
+                { 
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return null;
+                }
+            }   
             else
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
                 return null;
             }
-
         }
 
 
@@ -273,8 +288,10 @@ namespace VolunteeringServer.Controllers
                         return added;
                     }
                     else
+                    {
                         Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                    return null;
+                        return null;
+                    }
                 }
                 else
                 {

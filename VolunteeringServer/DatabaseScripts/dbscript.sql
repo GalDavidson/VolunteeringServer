@@ -507,5 +507,25 @@ VALUES (3,4)
 INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
 VALUES (3,12)
 
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (1,1,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (1,2,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (1,3,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (2,1,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (2,2,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (3,1,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (3,3,0,'')
 
 --scaffold-dbcontext "Server=localhost\sqlexpress;Database=VolunteeringDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models –force
