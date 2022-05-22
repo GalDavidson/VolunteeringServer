@@ -90,9 +90,8 @@ CREATE TABLE DailyEvents(
     ActionDate DATETIME default GETDATE(),
     Caption NVARCHAR(255) NOT NULL,
     EventName NVARCHAR(255) NOT NULL,
-    EventDate DATE NOT NULL,
-    StartTime TIME NOT NULL,
-    EndTime TIME NOT NULL,
+    StartTime DATETIME NOT NULL,
+    EndTime DATETIME NOT NULL,
 	AreaID INT FOREIGN KEY REFERENCES Areas (AreaID)
 );
 

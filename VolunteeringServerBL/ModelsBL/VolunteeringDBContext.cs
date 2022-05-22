@@ -66,7 +66,6 @@ namespace VolunteeringServerBL.Models
             try
             {
                 this.Entry(v).State = EntityState.Added;
-                //this.VolunteersInEvents.Update(v);
                 this.SaveChanges();
                 return v;
             }
@@ -269,7 +268,8 @@ namespace VolunteeringServerBL.Models
         {
             try
             {
-                this.VolunteersInEvents.Remove(de.VolunteersInEvents.FirstOrDefault());
+                VolunteersInEvent v = de.VolunteersInEvents.FirstOrDefault();
+                this.Entry(v).State = EntityState.Deleted;
                 this.SaveChanges();
                 return true;
             }
