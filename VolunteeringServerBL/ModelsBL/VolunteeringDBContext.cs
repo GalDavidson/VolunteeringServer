@@ -279,5 +279,28 @@ namespace VolunteeringServerBL.Models
                 return false;
             }
         }
+
+
+        public bool DeleteEv(DailyEvent de)
+        {
+            try
+            {
+                List<VolunteersInEvent> lst = VolunteersInEvents.ToList();
+                foreach(VolunteersInEvent v in lst)
+                {
+                    if (v.EventId == de.EventId)
+                        this.Entry(v).State = EntityState.Deleted;
+                }
+
+                this.Entry(de).State = EntityState.Deleted;
+                this.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
     }
 }

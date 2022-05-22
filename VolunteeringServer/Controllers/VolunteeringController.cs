@@ -486,6 +486,36 @@ namespace VolunteeringServer.Controllers
         }
 
 
+        [Route("DeleteEvent")]
+        [HttpPost]
+        public bool Delete([FromBody] DailyEvent e)
+        {
+            Association user = HttpContext.Session.GetObject<Association>("theUser");
+            //Check if user logged in and its name isn't null
+            if (user != null && user.InformationAbout != "")
+            {
+                if (e != null && user.AssociationId == e.AssociationId)
+                {
+                    bool success = this.context.DeleteEv(e);
+                    if (success)
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                        return success;
+                    }
+                    else
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return false;
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return false;
+                }
+            }
+            return false;
+        }
+
+
         [Route("RemoveVolFromEvent")]
         [HttpPost]
         public bool RemoveVol([FromBody] DailyEvent e)
