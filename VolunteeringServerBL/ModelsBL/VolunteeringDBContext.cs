@@ -65,7 +65,8 @@ namespace VolunteeringServerBL.Models
         {
             try
             {
-                this.VolunteersInEvents.Update(v);
+                this.Entry(v).State = EntityState.Added;
+                //this.VolunteersInEvents.Update(v);
                 this.SaveChanges();
                 return v;
             }
@@ -254,6 +255,21 @@ namespace VolunteeringServerBL.Models
             try
             {
                 this.Volunteers.Remove(v);
+                this.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public bool RemoveVolFromEv(DailyEvent de)
+        {
+            try
+            {
+                this.VolunteersInEvents.Remove(de.VolunteersInEvents.FirstOrDefault());
                 this.SaveChanges();
                 return true;
             }
