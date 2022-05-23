@@ -166,7 +166,7 @@ namespace VolunteeringServerBL.Models
 
                 this.Entry(updated).State = EntityState.Modified;
 
-                ICollection<OccupationalAreasOfEvent> occu = this.OccupationalAreasOfEvents.Where(o => o.EventId == updated.AssociationId).ToList();
+                ICollection<OccupationalAreasOfEvent> occu = this.OccupationalAreasOfEvents.Where(o => o.EventId == updated.EventId).ToList();
                 //Loop through the DB records and check if any of them should be deleted
                 foreach (OccupationalAreasOfEvent o in occu)
                 {
