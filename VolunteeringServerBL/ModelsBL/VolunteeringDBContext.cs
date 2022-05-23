@@ -158,6 +158,45 @@ namespace VolunteeringServerBL.Models
 
         }
 
+        public DailyEvent UpdateEv(DailyEvent current, DailyEvent updated)
+        {
+            try
+            {
+                this.ChangeTracker.Clear();
+
+                this.Entry(updated).State = EntityState.Modified;
+
+                ICollection<OccupationalAreasOfEvent> occu = this.OccupationalAreasOfEvents.Where(o => o.EventId == updated.AssociationId).ToList();
+                //Loop through the DB records and check if any of them should be deleted
+                foreach (OccupationalAreasOfEvent o in occu)
+                {
+                    OccupationalAreasOfEvent temp = updated.OccupationalAreasOfEvents.Where(a => a.OccupationalAreaId == o.OccupationalAreaId && a.EventId == o.EventId).FirstOrDefault();
+                    if (temp == null)
+                        this.Entry(o).State = EntityState.Deleted;
+                    else
+                        this.Entry(o).State = EntityState.Unchanged;
+
+                }
+
+                //loop through the updated user records and check if they need to be added to the DB
+                foreach (OccupationalAreasOfEvent o in updated.OccupationalAreasOfEvents)
+                {
+                    OccupationalAreasOfEvent temp = occu.Where(a => a.OccupationalAreaId == o.OccupationalAreaId && a.EventId == o.EventId).FirstOrDefault();
+                    if (temp == null)
+                        this.Entry(o).State = EntityState.Added;
+                }
+
+                this.SaveChanges();
+                return updated;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+
         public bool AddOccupationalArea(OccupationalArea area)
         {
             try
@@ -269,6 +308,7 @@ namespace VolunteeringServerBL.Models
             try
             {
                 VolunteersInEvent v = de.VolunteersInEvents.FirstOrDefault();
+                this.ChangeTracker.Clear();
                 this.Entry(v).State = EntityState.Deleted;
                 this.SaveChanges();
                 return true;

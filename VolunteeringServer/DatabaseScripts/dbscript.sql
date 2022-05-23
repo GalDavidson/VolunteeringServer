@@ -467,14 +467,14 @@ VALUES ('Shiri','Yaffe','6363shiri@gmail.com','Shirile','joya2328',1,'2004-09-03
 INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
 VALUES ('Shira','Yosov','shirayosov6@gmail.com','ShiraShira','pizzaNitza',1,'2004-04-04')
 
-INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime, AreaID)
-VALUES ('חיפה', 1 ,'בואו יהיה כיף', 'טיפול בחזירי בר', '2022-4-27', '17:00','19:00', 4)
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, StartTime, EndTime, AreaID)
+VALUES ('חיפה', 1 ,'בואו יהיה כיף', 'טיפול בחזירי בר', '2022-5-20 17:00', '2022-5-20 19:00', 4)
 
-INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime, AreaID)
-VALUES ('כפר סבא', 2 ,'!!! יהיו אוכל ושתייה בחינם', 'התנדבות בבית אבות', '2022-5-1', '11:00','15:30', 6)
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, StartTime, EndTime, AreaID)
+VALUES ('כפר סבא', 2 ,'!!! יהיו אוכל ושתייה בחינם', 'התנדבות בבית אבות', '2022-7-4 11:00', '2022-7-4 13:30', 6)
 
-INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, EventDate, StartTime, EndTime, AreaID)
-VALUES ('אור עקיבא', 1 ,'מצווה חשובה במיוחד', 'חלוקת סלי מזון וביקור קשישים', '2022-4-30', '9:00','12:00', 4)
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, StartTime, EndTime, AreaID)
+VALUES ('אור עקיבא', 1 ,'מצווה חשובה במיוחד', 'חלוקת סלי מזון וביקור קשישים', '2022-8-15 9:00','2022-8-15 12:00', 4)
 
 INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
 VALUES (1,1)

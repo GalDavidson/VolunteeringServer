@@ -110,6 +110,48 @@ namespace VolunteeringServer.Controllers
         }
 
 
+        [Route("UpdateEvent")]
+        [HttpPost]
+        public DailyEvent UpdateEv([FromBody] DailyEvent e)
+        {
+            //If user is null the request is bad
+            if (e == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                return null;
+            }
+
+            Association currentUser = HttpContext.Session.GetObject<Association>("theUser");
+            List<DailyEvent> lst = currentUser.DailyEvents.ToList();
+            DailyEvent currentEvent = new DailyEvent();
+            foreach (DailyEvent d in lst)
+            {
+                if (d.EventId == e.EventId)
+                    currentEvent = d;
+            }
+
+            //Check if user logged in and its ID is the same as the contact user ID
+            if (currentUser != null && e != null && currentEvent != null && e.EventId == currentEvent.EventId) 
+            {
+                DailyEvent updatedEvent = context.UpdateEv(currentEvent, e);
+
+                if (updatedEvent == null)
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return null;
+                }
+
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                return updatedEvent;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return null;
+            }
+        }
+
+
         [Route("GetLookups")]
         [HttpGet]
         public Lookups GetLookups()
@@ -520,7 +562,17 @@ namespace VolunteeringServer.Controllers
         [HttpPost]
         public bool RemoveVol([FromBody] DailyEvent e)
         {
-            Object user = HttpContext.Session.GetObject<Object>("theUser");
+            Object user = null;
+            Association userAccosiation = HttpContext.Session.GetObject<Association>("theUser");
+            if (userAccosiation.AssociationId == 0)
+            {
+                user = HttpContext.Session.GetObject<Volunteer>("theUser");
+            }
+            else
+            {
+                user = userAccosiation;
+            }
+            
             //Check if user logged in and its name isn't null
             if (user != null && (user is Association || user is Volunteer))
             {
