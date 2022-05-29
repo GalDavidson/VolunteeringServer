@@ -112,42 +112,35 @@ namespace VolunteeringServer.Controllers
 
         [Route("UpdateEvent")]
         [HttpPost]
-        public DailyEvent UpdateEv([FromBody] DailyEvent e)
+        public bool UpdateEv([FromBody] DailyEvent e)
         {
             //If user is null the request is bad
             if (e == null)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                return null;
+                return false;
             }
 
             Association currentUser = HttpContext.Session.GetObject<Association>("theUser");
-            List<DailyEvent> lst = currentUser.DailyEvents.ToList();
-            DailyEvent currentEvent = new DailyEvent();
-            foreach (DailyEvent d in lst)
-            {
-                if (d.EventId == e.EventId)
-                    currentEvent = d;
-            }
-
+            
             //Check if user logged in and its ID is the same as the contact user ID
-            if (currentUser != null && e != null && currentEvent != null && e.EventId == currentEvent.EventId) 
+            if (currentUser != null && e != null) 
             {
-                DailyEvent updatedEvent = context.UpdateEv(currentEvent, e);
+                bool success = context.UpdateEv(e);
 
-                if (updatedEvent == null)
+                if (!success)
                 {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                    return null;
+                    return false;
                 }
 
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                return updatedEvent;
+                return true;
             }
             else
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                return null;
+                return false;
             }
         }
 

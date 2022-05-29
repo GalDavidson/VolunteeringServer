@@ -158,14 +158,11 @@ namespace VolunteeringServerBL.Models
 
         }
 
-        public DailyEvent UpdateEv(DailyEvent current, DailyEvent updated)
+        public bool UpdateEv(DailyEvent updated)
         {
             try
             {
                 this.ChangeTracker.Clear();
-
-                this.Entry(updated).State = EntityState.Modified;
-
                 ICollection<OccupationalAreasOfEvent> occu = this.OccupationalAreasOfEvents.Where(o => o.EventId == updated.EventId).ToList();
                 //Loop through the DB records and check if any of them should be deleted
                 foreach (OccupationalAreasOfEvent o in occu)
@@ -185,14 +182,14 @@ namespace VolunteeringServerBL.Models
                     if (temp == null)
                         this.Entry(o).State = EntityState.Added;
                 }
-
+                this.Entry(updated).State = EntityState.Modified;
                 this.SaveChanges();
-                return updated;
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return null;
+                return false;
             }
         }
 
