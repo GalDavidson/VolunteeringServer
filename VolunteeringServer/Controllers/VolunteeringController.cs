@@ -226,6 +226,31 @@ namespace VolunteeringServer.Controllers
             }
         }
 
+        [Route("GetAllEvents")]
+        [HttpGet]
+        public List<DailyEvent> GetAllEvents()
+        {
+            try
+            {
+                Association user = HttpContext.Session.GetObject<Association>("theUser");
+                //Check if user logged in and its ID is the same as the contact user ID
+                if (user != null && user.PhoneNum != "")
+                {
+                    return context.DailyEvents.ToList();
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
 
         [Route("RegisterAsso")]
         [HttpPost]
