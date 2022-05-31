@@ -322,19 +322,19 @@ namespace VolunteeringServerBL.Models
         {
             try
             {
-                List<VolunteersInEvent> lst = VolunteersInEvents.ToList();
-                foreach (VolunteersInEvent v in lst)
+                List<VolunteersInEvent> volLst = VolunteersInEvents.ToList();
+                foreach (VolunteersInEvent v in volLst)
                 {
                     if (v.EventId == de.EventId)
                         this.Entry(v).State = EntityState.Deleted;
                 }
 
-                //List<VolunteersInEvent> lst = VolunteersInEvents.ToList();
-                //foreach(VolunteersInEvent v in lst)
-                //{
-                //    if (v.EventId == de.EventId)
-                //        this.Entry(v).State = EntityState.Deleted;
-                //}
+                List<OccupationalAreasOfEvent> OccuLst = OccupationalAreasOfEvents.ToList();
+                foreach (OccupationalAreasOfEvent v in OccuLst)
+                {
+                    if (v.EventId == de.EventId)
+                        this.Entry(v).State = EntityState.Deleted;
+                }
 
                 this.Entry(de).State = EntityState.Deleted;
                 this.SaveChanges();
