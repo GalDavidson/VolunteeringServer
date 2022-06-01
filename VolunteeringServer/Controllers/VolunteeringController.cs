@@ -236,7 +236,7 @@ namespace VolunteeringServer.Controllers
                 //Check if user logged in and its ID is the same as the contact user ID
                 if (user != null && user.PhoneNum != "")
                 {
-                    return context.DailyEvents.ToList();
+                    return context.DailyEvents.Include(u => u.VolunteersInEvents).ThenInclude(v => v.Volunteer).ToList();
                 }
                 else
                 {
