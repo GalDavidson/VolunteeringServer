@@ -19,9 +19,9 @@ namespace VolunteeringServerBL.Models
         public DateTime? ActionDate { get; set; }
         public string Caption { get; set; }
         public string EventName { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
         public int? AreaId { get; set; }
-        public DateTime? StartTime { get; set; }
-        public DateTime? EndTime { get; set; }
 
         public virtual Area Area { get; set; }
         public virtual Association Association { get; set; }

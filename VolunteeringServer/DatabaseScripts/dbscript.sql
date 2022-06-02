@@ -527,4 +527,27 @@ VALUES (3,1,0,'')
 INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
 VALUES (3,3,0,'')
 
+CREATE TABLE Ranks(
+    RankID INT IDENTITY(1,1) PRIMARY KEY,
+    RankName NVARCHAR(255) NOT NULL
+);
+
+INSERT INTO Ranks(RankName)
+VALUES ('מתחיל')
+
+INSERT INTO Ranks(RankName)
+VALUES ('מתחבר לקונספט')
+
+INSERT INTO Ranks(RankName)
+VALUES ('אוהב')
+
+INSERT INTO Ranks(RankName)
+VALUES ('מתקדם')
+
+INSERT INTO Ranks(RankName)
+VALUES ('מתמיד')
+
+INSERT INTO Ranks(RankName)
+VALUES ('מאסטר')
+
 --scaffold-dbcontext "Server=localhost\sqlexpress;Database=VolunteeringDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models –force
