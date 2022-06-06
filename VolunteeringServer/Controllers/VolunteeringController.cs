@@ -184,7 +184,7 @@ namespace VolunteeringServer.Controllers
                 //Check if user logged in and its ID is the same as the contact user ID
                 if (user != null && user.AdminName != "")
                 {
-                    return context.Associations.ToList();
+                    return context.Associations.Include(b => b.BranchesOfAssociations).ThenInclude(br => br.Branch).Include(o => o.OccupationalAreasOfAssociations).ThenInclude(oc => oc.OccupationalArea).ToList();
                 }
                 else
                 {
@@ -236,7 +236,7 @@ namespace VolunteeringServer.Controllers
                 //Check if user logged in and its ID is the same as the contact user ID
                 if (user != null && user.PhoneNum != "")
                 {
-                    return context.DailyEvents.Include(u => u.VolunteersInEvents).ThenInclude(v => v.Volunteer).ToList();
+                    return context.DailyEvents.Include(u => u.VolunteersInEvents).ThenInclude(v => v.Volunteer).ThenInclude(h => h.Gender).ToList();
                 }
                 else
                 {
@@ -250,7 +250,6 @@ namespace VolunteeringServer.Controllers
                 return null;
             }
         }
-
 
         [Route("RegisterAsso")]
         [HttpPost]
