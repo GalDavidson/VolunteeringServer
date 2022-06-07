@@ -144,6 +144,40 @@ namespace VolunteeringServer.Controllers
             }
         }
 
+        [Route("UpdateRating")]
+        [HttpPost]
+        public bool UpdateR([FromBody] VolunteersInEvent vol)
+        {
+            //If user is null the request is bad
+            if (vol == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                return false;
+            }
+
+            Association currentUser = HttpContext.Session.GetObject<Association>("theUser");
+
+            //Check if user logged in and its ID is the same as the contact user ID
+            if (currentUser != null)
+            {
+                bool success = context.UpdateVolRate(vol);
+
+                if (!success)
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return false;
+                }
+
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                return true;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
+        }
+
 
         [Route("GetLookups")]
         [HttpGet]

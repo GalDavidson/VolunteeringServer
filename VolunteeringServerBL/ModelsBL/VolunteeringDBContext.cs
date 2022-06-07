@@ -193,6 +193,22 @@ namespace VolunteeringServerBL.Models
             }
         }
 
+        public bool UpdateVolRate(VolunteersInEvent v)
+        {
+            try
+            {
+                this.ChangeTracker.Clear();
+               
+                this.Entry(v).State = EntityState.Modified;
+                this.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
 
         public bool AddOccupationalArea(OccupationalArea area)
         {
