@@ -444,6 +444,9 @@ VALUES ('הנגב')
 INSERT INTO Areas(AreaName)
 VALUES ('הערבה')
 
+INSERT INTO Areas(AreaName)
+VALUES ('גוש דן ותל אביב')
+
 Go
 
 INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
