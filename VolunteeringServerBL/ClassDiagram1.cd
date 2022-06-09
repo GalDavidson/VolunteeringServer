@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="VolunteeringServerBL.Models.AppAdmin">
+    <Position X="9" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAECQAAAAAAAAAAAAAQAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\AppAdmin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VolunteeringServerBL.Models.Area">
+    <Position X="7.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAYAAAAAAAAAA=</HashCode>
+      <FileName>Models\Area.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="DailyEvents" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="VolunteeringServerBL.Models.Association">
+    <Position X="1.25" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAACQAAAAAAAAIAAAQEAAEAAAAQQAAAAAAgAA=</HashCode>
+      <FileName>Models\Association.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="OccupationalAreasOfAssociations" />
+      <Property Name="BranchesOfAssociations" />
+      <Property Name="DailyEvents" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="VolunteeringServerBL.Models.Branch">
+    <Position X="6.25" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Models\Branch.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="BranchesOfAssociations" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="VolunteeringServerBL.Models.BranchesOfAssociation">
+    <Position X="4" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAEAAAAAgAAAAAAAAAAQA=</HashCode>
+      <FileName>Models\BranchesOfAssociation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Association" />
+      <Property Name="Branch" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="VolunteeringServerBL.Models.DailyEvent">
+    <Position X="4.75" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAAAAgAgAAAAAAgAAAAAAAAQMIAgAAAAKAAAAQAAAQA=</HashCode>
+      <FileName>Models\DailyEvent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Area" />
+      <Property Name="Association" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="OccupationalAreasOfEvents" />
+      <Property Name="VolunteersInEvents" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="VolunteeringServerBL.Models.Gender" Collapsed="true">
+    <Position X="8.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAIAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Gender.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VolunteeringServerBL.Models.OccupationalArea">
+    <Position X="4" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAEAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\OccupationalArea.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="OccupationalAreasOfAssociations" />
+      <Property Name="OccupationalAreasOfEvents" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="VolunteeringServerBL.Models.OccupationalAreasOfAssociation">
+    <Position X="2.25" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAIAAQA=</HashCode>
+      <FileName>Models\OccupationalAreasOfAssociation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Association" />
+      <Property Name="OccupationalArea" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="VolunteeringServerBL.Models.OccupationalAreasOfEvent">
+    <Position X="7.75" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAgAEAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Models\OccupationalAreasOfEvent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="OccupationalArea" />
+      <Property Name="Event" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="VolunteeringServerBL.Models.Rank">
+    <Position X="9.25" Y="10.25" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAA=</HashCode>
+      <FileName>Models\Rank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VolunteeringServerBL.Models.Volunteer">
+    <Position X="11.25" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACQAABiAAAAAAAQUACAAEAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Volunteer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Gender" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="VolunteersInEvents" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="VolunteeringServerBL.Models.VolunteersInEvent">
+    <Position X="10" Y="5.25" Width="1.5" />
+    <Members>
+      <Property Name="Comments" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAEAAAAQIiAAAAAAAAAIAAAAIAA=</HashCode>
+      <FileName>Models\VolunteersInEvent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Volunteer" />
+      <Property Name="Event" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
