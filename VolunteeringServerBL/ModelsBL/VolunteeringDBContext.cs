@@ -283,11 +283,13 @@ namespace VolunteeringServerBL.Models
         }
 
 
-        public bool RemoveAsso(Association a)
+        public bool RemoveAsso(Association asso)
         {
             try
             {
                 this.ChangeTracker.Clear();
+
+                Association a = this.Associations.Where(assos => assos.AssociationId == asso.AssociationId).FirstOrDefault();
 
                 ICollection<OccupationalAreasOfAssociation> ocList = a.OccupationalAreasOfAssociations.ToList();
                 foreach(OccupationalAreasOfAssociation occ in ocList)

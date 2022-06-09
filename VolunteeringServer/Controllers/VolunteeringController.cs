@@ -218,15 +218,15 @@ namespace VolunteeringServer.Controllers
                 //Check if user logged in and its ID is the same as the contact user ID
                 if (user != null && user.AdminName != "")
                 {
-                    return context.Associations.Include(b => b.BranchesOfAssociations).ThenInclude(br => br.Branch).Include(o => o.OccupationalAreasOfAssociations).ThenInclude(oc => oc.OccupationalArea).ToList();
+                    List<Association> a = this.context.Associations.
+                        Include
+                    return context.                        Associations.Include(e => e.DailyEvents).ThenInclude(d => d.VolunteersInEvents).Include(b => b.BranchesOfAssociations).ThenInclude(br => br.Branch).Include(o => o.OccupationalAreasOfAssociations).ThenInclude(oc => oc.OccupationalArea).ToList();
                 }
                 else
                 {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
                     return null;
-                }
-
-                    
+                }   
             }
             catch (Exception e)
             {
@@ -246,6 +246,31 @@ namespace VolunteeringServer.Controllers
                 if (user != null && user.AdminName != "")
                 {
                     return context.Volunteers.Include(v => v.VolunteersInEvents).ToList();
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        [Route("GetAllVolsInEvents")]
+        [HttpGet]
+        public List<VolunteersInEvent> GetAllVolsInEvents()
+        {
+            try
+            {
+                AppAdmin user = HttpContext.Session.GetObject<AppAdmin>("theUser");
+                //Check if user logged in and its ID is the same as the contact user ID
+                if (user != null && user.AdminName != "")
+                {
+                    return context.VolunteersInEvents.ToList();
                 }
                 else
                 {
