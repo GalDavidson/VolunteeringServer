@@ -128,8 +128,6 @@ namespace VolunteeringServerBL.Models
                 }
 
                 this.SaveChanges();
-
-                
                 return updatedUser;
             }
             catch (Exception e)
@@ -155,7 +153,6 @@ namespace VolunteeringServerBL.Models
                 Console.WriteLine(e.Message);
                 return null;
             }
-
         }
 
         public bool UpdateEv(DailyEvent updated)
@@ -290,6 +287,28 @@ namespace VolunteeringServerBL.Models
         {
             try
             {
+                this.ChangeTracker.Clear();
+
+                ICollection<OccupationalAreasOfAssociation> ocList = a.OccupationalAreasOfAssociations.ToList();
+                foreach(OccupationalAreasOfAssociation occ in ocList)
+                {
+                    if (occ.AssociationId == a.AssociationId)
+                        this.Entry(occ).State = EntityState.Deleted;
+                }
+
+                ICollection<BranchesOfAssociation> brList = a.BranchesOfAssociations.ToList();
+                foreach (BranchesOfAssociation br in brList)
+                {
+                    if (br.AssociationId == a.AssociationId)
+                        this.Entry(br).State = EntityState.Deleted;
+                }
+
+                ICollection<DailyEvent> events = a.DailyEvents.ToList();
+                foreach (DailyEvent ev in events)
+                {
+                    this.DeleteEv(ev);
+                }
+
                 this.Associations.Remove(a);
                 this.SaveChanges();
                 return true;

@@ -245,7 +245,7 @@ namespace VolunteeringServer.Controllers
                 //Check if user logged in and its ID is the same as the contact user ID
                 if (user != null && user.AdminName != "")
                 {
-                    return context.Volunteers.ToList();
+                    return context.Volunteers.Include(v => v.VolunteersInEvents).ToList();
                 }
                 else
                 {
@@ -270,7 +270,7 @@ namespace VolunteeringServer.Controllers
                 //Check if user logged in and its ID is the same as the contact user ID
                 if (user != null && user.PhoneNum != "")
                 {
-                    return context.DailyEvents.Include(u => u.VolunteersInEvents).ThenInclude(v => v.Volunteer).ThenInclude(h => h.Gender).ToList();
+                    return context.DailyEvents.Include(o => o.OccupationalAreasOfEvents).Include(u => u.VolunteersInEvents).ThenInclude(v => v.Volunteer).ThenInclude(h => h.Gender).ToList();
                 }
                 else
                 {
