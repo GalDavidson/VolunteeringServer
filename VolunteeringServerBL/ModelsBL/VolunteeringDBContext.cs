@@ -197,6 +197,26 @@ namespace VolunteeringServerBL.Models
                 this.ChangeTracker.Clear();
                
                 this.Entry(v).State = EntityState.Modified;
+
+                int ratingSum = 0;
+                int ratingTimes = 0;
+                ICollection <VolunteersInEvent> lst = this.VolunteersInEvents.Where(vol => vol.VolunteerId == v.VolunteerId).ToList();
+                foreach (VolunteersInEvent volInEv in lst)
+                {
+                    if (volInEv.RatingNum != 0)
+                    {
+                        ratingSum += volInEv.RatingNum;
+                        ratingTimes += 1;
+                    }
+                }
+
+                int average = ratingSum / ratingTimes;
+
+                Volunteer vol = this.Volunteers.Where(volunteer => volunteer.VolunteerId == v.VolunteerId).FirstOrDefault();
+                vol.AvgRating = average;
+
+                this.Entry(vol).State = EntityState.Modified;
+
                 this.SaveChanges();
                 return true;
             }
@@ -283,32 +303,40 @@ namespace VolunteeringServerBL.Models
         }
 
 
-        public bool RemoveAsso(Association asso)
+        public bool RemoveAsso(Association a)
         {
             try
             {
                 this.ChangeTracker.Clear();
 
-                Association a = this.Associations.Where(assos => assos.AssociationId == asso.AssociationId).FirstOrDefault();
-
                 ICollection<OccupationalAreasOfAssociation> ocList = a.OccupationalAreasOfAssociations.ToList();
                 foreach(OccupationalAreasOfAssociation occ in ocList)
                 {
-                    if (occ.AssociationId == a.AssociationId)
-                        this.Entry(occ).State = EntityState.Deleted;
+                    this.Entry(occ).State = EntityState.Deleted;
                 }
 
                 ICollection<BranchesOfAssociation> brList = a.BranchesOfAssociations.ToList();
                 foreach (BranchesOfAssociation br in brList)
                 {
-                    if (br.AssociationId == a.AssociationId)
-                        this.Entry(br).State = EntityState.Deleted;
+                    this.Entry(br).State = EntityState.Deleted;
                 }
 
                 ICollection<DailyEvent> events = a.DailyEvents.ToList();
-                foreach (DailyEvent ev in events)
+                foreach (DailyEvent de in events)
                 {
-                    this.DeleteEv(ev);
+                    List<VolunteersInEvent> volLst = de.VolunteersInEvents.ToList();
+                    foreach (VolunteersInEvent v in volLst)
+                    {
+                        this.Entry(v).State = EntityState.Deleted;
+                    }
+
+                    List<OccupationalAreasOfEvent> OccuLst = de.OccupationalAreasOfEvents.ToList();
+                    foreach (OccupationalAreasOfEvent o in OccuLst)
+                    {
+                        this.Entry(o).State = EntityState.Deleted;
+                    }
+
+                    this.Entry(de).State = EntityState.Deleted;
                 }
 
                 this.Associations.Remove(a);
@@ -326,6 +354,15 @@ namespace VolunteeringServerBL.Models
         {
             try
             {
+                this.ChangeTracker.Clear();
+
+                ICollection<VolunteersInEvent> volList = VolunteersInEvents.ToList();
+                foreach (VolunteersInEvent vol in volList)
+                {
+                    if (vol.VolunteerId == v.VolunteerId)
+                        this.Entry(vol).State = EntityState.Deleted;
+                }
+
                 this.Volunteers.Remove(v);
                 this.SaveChanges();
                 return true;
@@ -362,15 +399,13 @@ namespace VolunteeringServerBL.Models
                 List<VolunteersInEvent> volLst = VolunteersInEvents.ToList();
                 foreach (VolunteersInEvent v in volLst)
                 {
-                    if (v.EventId == de.EventId)
-                        this.Entry(v).State = EntityState.Deleted;
+                    this.Entry(v).State = EntityState.Deleted;
                 }
 
                 List<OccupationalAreasOfEvent> OccuLst = OccupationalAreasOfEvents.ToList();
                 foreach (OccupationalAreasOfEvent v in OccuLst)
                 {
-                    if (v.EventId == de.EventId)
-                        this.Entry(v).State = EntityState.Deleted;
+                    this.Entry(v).State = EntityState.Deleted;
                 }
 
                 this.Entry(de).State = EntityState.Deleted;

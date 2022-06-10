@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -48,14 +49,14 @@ namespace VolunteeringServerBL.Models
             modelBuilder.Entity<AppAdmin>(entity =>
             {
                 entity.HasKey(e => e.AdminId)
-                    .HasName("PK__AppAdmin__719FE4E86DD5E225");
+                    .HasName("PK__AppAdmin__719FE4E8F7E05346");
 
                 entity.ToTable("AppAdmin");
 
-                entity.HasIndex(e => e.Email, "UQ__AppAdmin__A9D10534044A3E40")
+                entity.HasIndex(e => e.Email, "UQ__AppAdmin__A9D10534785E841F")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__AppAdmin__C9F284564597C56E")
+                entity.HasIndex(e => e.UserName, "UQ__AppAdmin__C9F284563CE3EEA0")
                     .IsUnique();
 
                 entity.Property(e => e.AdminId).HasColumnName("AdminID");
@@ -88,10 +89,10 @@ namespace VolunteeringServerBL.Models
 
             modelBuilder.Entity<Association>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Associat__A9D105343C5BDA44")
+                entity.HasIndex(e => e.Email, "UQ__Associat__A9D105344CC4ADF4")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__Associat__C9F28456FB9DD830")
+                entity.HasIndex(e => e.UserName, "UQ__Associat__C9F284563335C3EF")
                     .IsUnique();
 
                 entity.Property(e => e.AssociationId).HasColumnName("AssociationID");
@@ -176,7 +177,7 @@ namespace VolunteeringServerBL.Models
             modelBuilder.Entity<DailyEvent>(entity =>
             {
                 entity.HasKey(e => e.EventId)
-                    .HasName("PK__DailyEve__7944C8704B2A9043");
+                    .HasName("PK__DailyEve__7944C87064FCF82F");
 
                 entity.Property(e => e.EventId).HasColumnName("EventID");
 
@@ -292,10 +293,10 @@ namespace VolunteeringServerBL.Models
 
             modelBuilder.Entity<Volunteer>(entity =>
             {
-                entity.HasIndex(e => e.Email, "UQ__Voluntee__A9D105347DFBF8C7")
+                entity.HasIndex(e => e.Email, "UQ__Voluntee__A9D1053495FEF601")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserName, "UQ__Voluntee__C9F2845619CBDAFE")
+                entity.HasIndex(e => e.UserName, "UQ__Voluntee__C9F28456EC2B0E58")
                     .IsUnique();
 
                 entity.Property(e => e.VolunteerId).HasColumnName("VolunteerID");

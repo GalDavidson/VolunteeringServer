@@ -21,6 +21,7 @@ namespace VolunteeringServerBL.Models
         public int? GenderId { get; set; }
         public DateTime BirthDate { get; set; }
         public DateTime? ActionDate { get; set; }
+        public int? AvgRating { get; set; }
 
         public virtual Gender Gender { get; set; }
         public virtual ICollection<VolunteersInEvent> VolunteersInEvents { get; set; }

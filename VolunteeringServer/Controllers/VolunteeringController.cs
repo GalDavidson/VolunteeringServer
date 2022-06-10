@@ -191,10 +191,7 @@ namespace VolunteeringServer.Controllers
                     Branches = context.Branches.ToList(),
                     Areas = context.Areas.ToList(),
                     Genders = context.Genders.ToList(),
-                    Volunteers = context.Volunteers.ToList(),
-                    Associations = context.Associations.ToList(),
-                    Events = context.DailyEvents.Include(u => u.OccupationalAreasOfEvents).ToList(),
-                    VolsInEvents = context.VolunteersInEvents.ToList()
+                    Ranks = context.Ranks.ToList()
                 };
 
                 Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
@@ -218,9 +215,16 @@ namespace VolunteeringServer.Controllers
                 //Check if user logged in and its ID is the same as the contact user ID
                 if (user != null && user.AdminName != "")
                 {
-                    List<Association> a = this.context.Associations.
-                        Include
-                    return context.                        Associations.Include(e => e.DailyEvents).ThenInclude(d => d.VolunteersInEvents).Include(b => b.BranchesOfAssociations).ThenInclude(br => br.Branch).Include(o => o.OccupationalAreasOfAssociations).ThenInclude(oc => oc.OccupationalArea).ToList();
+                    return context.Associations
+                        .Include(a => a.OccupationalAreasOfAssociations).ThenInclude(oc => oc.OccupationalArea)
+                        .Include(a => a.BranchesOfAssociations)
+                        .ThenInclude(b => b.Branch)
+                        .Include(a => a.DailyEvents)
+                        .ThenInclude(v => v.VolunteersInEvents)
+                        .Include(a => a.DailyEvents)
+                        .ThenInclude(o => o.OccupationalAreasOfEvents)
+                        .ThenInclude(occ => occ.OccupationalArea)
+                        .ToList();
                 }
                 else
                 {
@@ -245,7 +249,7 @@ namespace VolunteeringServer.Controllers
                 //Check if user logged in and its ID is the same as the contact user ID
                 if (user != null && user.AdminName != "")
                 {
-                    return context.Volunteers.Include(v => v.VolunteersInEvents).ToList();
+                    return context.Volunteers.Include(g => g.Gender).Include(v => v.VolunteersInEvents).ToList();
                 }
                 else
                 {
@@ -291,17 +295,7 @@ namespace VolunteeringServer.Controllers
         {
             try
             {
-                Association user = HttpContext.Session.GetObject<Association>("theUser");
-                //Check if user logged in and its ID is the same as the contact user ID
-                if (user != null && user.PhoneNum != "")
-                {
-                    return context.DailyEvents.Include(o => o.OccupationalAreasOfEvents).Include(u => u.VolunteersInEvents).ThenInclude(v => v.Volunteer).ThenInclude(h => h.Gender).ToList();
-                }
-                else
-                {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                    return null;
-                }
+                return context.DailyEvents.Include(o => o.OccupationalAreasOfEvents).Include(u => u.VolunteersInEvents).ThenInclude(v => v.Volunteer).ThenInclude(h => h.Gender).ToList();
             }
             catch (Exception e)
             {
@@ -459,90 +453,70 @@ namespace VolunteeringServer.Controllers
         [HttpPost]
         public bool AddOccuArea([FromBody] OccupationalArea occupationalArea)
         {
-            Association user = HttpContext.Session.GetObject<Association>("theUser");
-            //Check if user logged in
-            if (user != null)
-            {
 
-                if (occupationalArea != null)
+            if (occupationalArea != null)
+            {
+                bool added = this.context.AddOccupationalArea(occupationalArea);
+                if (added)
                 {
-                    bool added = this.context.AddOccupationalArea(occupationalArea);
-                    if (added)
-                    {
-                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                        return added;
-                    }
-                    else
-                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                    return false;
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                    return added;
                 }
                 else
-                {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                    return false;
-                }
+                return false;
             }
-            return false;
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
         }
 
         [Route("AddBranch")]
         [HttpPost]
         public bool AddB([FromBody] Branch branch)
         {
-            Association user = HttpContext.Session.GetObject<Association>("theUser");
-            //Check if user logged in
-            if (user != null)
+            if (branch != null)
             {
-
-                if (branch != null)
+                bool added = this.context.AddBranch(branch);
+                if (added)
                 {
-                    bool added = this.context.AddBranch(branch);
-                    if (added)
-                    {
-                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                        return added;
-                    }
-                    else
-                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                    return false;
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                    return added;
                 }
                 else
-                {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                    return false;
-                }
+                return false;
             }
-            return false;
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
         }
 
         [Route("AddGender")]
         [HttpPost]
         public bool AddG([FromBody] Gender gender)
         {
-            Volunteer user = HttpContext.Session.GetObject<Volunteer>("theUser");
-            //Check if user logged in
-            if (user != null)
+            if (gender != null)
             {
-
-                if (gender != null)
+                bool added = this.context.AddGender(gender);
+                if (added)
                 {
-                    bool added = this.context.AddGender(gender);
-                    if (added)
-                    {
-                        Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                        return added;
-                    }
-                    else
-                        Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                    return false;
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                    return added;
                 }
                 else
-                {
                     Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
-                    return false;
-                }
+                return false;
             }
-            return false;
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
         }
 
         [Route("RemoveAsso")]

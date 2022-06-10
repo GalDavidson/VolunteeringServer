@@ -22,6 +22,7 @@ CREATE TABLE Volunteers(
     Pass NVARCHAR(255) NOT NULL,
 	GenderID INT FOREIGN KEY REFERENCES Gender (GenderID),
     BirthDate DATE NOT NULL,
+    AvgRating int NOT NULL default '1',
     ActionDate DATETIME default GETDATE()
 );
 
@@ -536,19 +537,16 @@ CREATE TABLE Ranks(
 );
 
 INSERT INTO Ranks(RankName)
-VALUES ('מתחיל')
+VALUES ('מתחיל.ה')
 
 INSERT INTO Ranks(RankName)
-VALUES ('מתחבר לקונספט')
+VALUES ('מתחבר.ת לקונספט')
 
 INSERT INTO Ranks(RankName)
-VALUES ('אוהב')
+VALUES ('מתקדמ.ת')
 
 INSERT INTO Ranks(RankName)
-VALUES ('מתקדם')
-
-INSERT INTO Ranks(RankName)
-VALUES ('מתמיד')
+VALUES ('מתמיד.ה')
 
 INSERT INTO Ranks(RankName)
 VALUES ('מאסטר')
