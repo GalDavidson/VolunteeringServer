@@ -7,11 +7,6 @@ namespace VolunteeringServerBL.Models
 {
     public partial class VolunteersInEvent
     {
-        public VolunteersInEvent()
-        {
-            Comments = new HashSet<Comment>();
-        }
-
         public int EventId { get; set; }
         public int VolunteerId { get; set; }
         public int RatingNum { get; set; }
@@ -20,6 +15,5 @@ namespace VolunteeringServerBL.Models
 
         public virtual DailyEvent Event { get; set; }
         public virtual Volunteer Volunteer { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
