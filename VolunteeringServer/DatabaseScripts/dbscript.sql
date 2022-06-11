@@ -450,65 +450,138 @@ VALUES ('גוש דן ותל אביב')
 
 Go
 
-INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
-VALUES ('Noy','Ganor','noiganor12@gmail.com','Noyga','hoenyhoeny',1,'2004-08-24')
+--Admin
 
 INSERT INTO AppAdmin([UserName],[Email],[Pass],[AdminName])
 VALUES ('gal','gal@gmail.com','12345','GalDavidson')
 
-INSERT INTO Associations([Email],[UserName],[InformationAbout],[PhoneNum],[Pass])
-VALUES ('a@gmail.com','aa123','sfbwrnb','0384756291','all12345')
+
+-- Associations
+
 
 INSERT INTO Associations([Email],[UserName],[InformationAbout],[PhoneNum],[Pass])
-VALUES ('b@gmail.com','bbb123','afrbrwtb','0769758761','band12345')
+VALUES ('betzavta@gmail.com','be_tzavta','"בצוותא", עמותה שעוזרת לאלמנות ויתומים','0544756291','aprf309d')
 
 INSERT INTO Associations([Email],[UserName],[InformationAbout],[PhoneNum],[Pass])
-VALUES ('c@gmail.com','cc123','wrnwtrynb','0584936722','coke1234')
+VALUES ('alut@gmail.com','_alut_','אגודה לאומית לילדים ובוגרים עם אוטיזם','0529758761','band8360v')
+
+INSERT INTO Associations([Email],[UserName],[InformationAbout],[PhoneNum],[Pass])
+VALUES ('reim@gmail.com','re-im','"רעים", למען משפחות נזקקות','0584036722','a8mf04s3')
+
+
+-- Volunteers
 
 INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
-VALUES ('Shiri','Yaffe','6363shiri@gmail.com','Shirile','joya2328',1,'2004-09-03')
+VALUES ('אדיר','אלעד','adir.el12@gmail.com','adir_elad','hoenyHoeny89',2,'2004-08-24')
 
 INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
-VALUES ('Shira','Yosov','shirayosov6@gmail.com','ShiraShira','pizzaNitza',1,'2004-04-04')
+VALUES ('חיים','כהן','haim.cohen4@gmail.com','haim_cohen4','joya2328',2,'1994-09-03')
+
+INSERT INTO Volunteers([fName],[lName],[Email],[UserName],[Pass],[GenderID],[BirthDate])
+VALUES ('עלמה','יוסף','alma.yosef2003@gmail.com','alma.yosef','pizzaNitza3',1,'2003-04-04')
+
+
+-- Events
 
 INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, StartTime, EndTime, AreaID)
-VALUES ('חיפה', 1 ,'בואו יהיה כיף', 'טיפול בחזירי בר', '2022-5-20 17:00', '2022-5-20 19:00', 4)
+VALUES ('החומש 5, קריית שמונה', 1 ,'הנאה ועשייה טובה', 'חלוקת שי לסוכות', '2022-5-22 11:00', '2022-5-22 12:30', 2)
 
 INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, StartTime, EndTime, AreaID)
-VALUES ('כפר סבא', 2 ,'!!! יהיו אוכל ושתייה בחינם', 'התנדבות בבית אבות', '2022-7-4 11:00', '2022-7-4 13:30', 6)
+VALUES ('המעפילים 7, רמת השרון', 1 ,'התנדבות משמעותית וחוויתית', 'ארגון מפגש אלמנות', '2022-7-12 17:00', '2022-7-12 18:30', 6)
 
 INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, StartTime, EndTime, AreaID)
-VALUES ('אור עקיבא', 1 ,'מצווה חשובה במיוחד', 'חלוקת סלי מזון וביקור קשישים', '2022-8-15 9:00','2022-8-15 12:00', 4)
+VALUES ('חוף סידני אלי, הרצליה', 1 ,'פיקניק, כניסה למים ומשחקי חברה', 'יום כיף ליתומים בים', '2022-4-15 9:00','2022-4-15 12:00', 6)
+
+
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, StartTime, EndTime, AreaID)
+VALUES ('קיבוץ גלויות 12, חיפה', 2 ,'חוויה נחמדה ומעשירה מאוד', 'פעילות ציור גרפיטי', '2022-5-20 17:00', '2022-5-20 19:00', 4)
+
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, StartTime, EndTime, AreaID)
+VALUES ('נורדאו 24, כפר סבא', 2 ,' יהיו אוכל ושתייה בחינם !!!', 'התנדבות בבית אבות', '2022-7-4 11:00', '2022-7-4 13:30', 6)
+
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, StartTime, EndTime, AreaID)
+VALUES ('הדובדבן 2, אור עקיבא', 2 ,'מצווה חשובה במיוחד', 'פעילות לחג החנוכה', '2022-8-15 9:00','2022-8-15 12:00', 4)
+
+
+
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, StartTime, EndTime, AreaID)
+VALUES ('השקמים 37, הוד השרון', 3 ,'כיף ואווירה טובה', 'אריזת סלי מזון', '2022-1-22 11:00', '2022-1-22 12:30', 6)
+
+INSERT INTO DailyEvents(EventLocation, AssociationID, Caption, EventName, StartTime, EndTime, AreaID)
+VALUES ('השקמים 37, הוד השרון', 3 ,'כיף ואווירה טובה', 'אריזת סלי מזון', '2022-8-13 20:00', '2022-8-13 22:00', 6)
+
+
+-- Occupational areas of association
 
 INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
-VALUES (1,1)
+VALUES (1,15)
 
 INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
-VALUES (1,4)
+VALUES (2,5)
 
 INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
-VALUES (1,12)
+VALUES (2,11)
 
 INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
-VALUES (2,12)
-
-INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
-VALUES (3,10)
-
-INSERT INTO OccupationalAreasOfAssociation(AssociationID, OccupationalAreaID)
-VALUES (3,14)
-
-INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
-VALUES (1,1)
-
-INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
-VALUES (2,12)
-
-INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
 VALUES (3,4)
 
+
+-- Branches Of Associations
+
+INSERT INTO BranchesOfAssociation(AssociationID, BranchID)
+VALUES (1,68)
+
+INSERT INTO BranchesOfAssociation(AssociationID, BranchID)
+VALUES (1,75)
+
+INSERT INTO BranchesOfAssociation(AssociationID, BranchID)
+VALUES (1,22)
+
+INSERT INTO BranchesOfAssociation(AssociationID, BranchID)
+VALUES (1,25)
+
+INSERT INTO BranchesOfAssociation(AssociationID, BranchID)
+VALUES (1,36)
+
+INSERT INTO BranchesOfAssociation(AssociationID, BranchID)
+VALUES (1,4)
+
+INSERT INTO BranchesOfAssociation(AssociationID, BranchID)
+VALUES (1,21)
+
+-- Occupational areas of events
+
 INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
-VALUES (3,12)
+VALUES (1,15)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (2,15)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (3,15)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (4,5)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (4,11)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (5,5)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (6,5)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (6,11)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (7,4)
+
+INSERT INTO OccupationalAreasOfEvents(EventID, OccupationalAreaID)
+VALUES (8,4)
+
+-- Volunteers In Events
 
 INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
 VALUES (1,1,0,'')
@@ -530,6 +603,28 @@ VALUES (3,1,0,'')
 
 INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
 VALUES (3,3,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (4,3,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (5,1,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (6,2,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (6,3,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (7,1,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (8,1,0,'')
+
+INSERT INTO VolunteersInEvents(EventID, VolunteerID, RatingNum, WrittenRating)
+VALUES (8,2,0,'')
+
 
 CREATE TABLE Ranks(
     RankID INT IDENTITY(1,1) PRIMARY KEY,

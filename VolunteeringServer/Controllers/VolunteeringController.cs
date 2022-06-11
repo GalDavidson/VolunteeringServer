@@ -346,6 +346,34 @@ namespace VolunteeringServer.Controllers
 
         }
 
+        [Route("Logout")]
+        [HttpPost]
+        public bool Logout([FromBody] Object user)
+        {
+            try
+            {
+                Object current = HttpContext.Session.GetObject<Object>("theUser");
+
+                if (current != null)
+                {
+                    HttpContext.Session.Remove("theUser");
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                    return true;
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                    return false;
+                }
+            }
+            catch
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+                return false;
+            }
+        }
+
+
         [Route("AddNewVolInEvent")]
         [HttpPost]
 
