@@ -3,7 +3,7 @@ CREATE DATABASE VolunteeringDB
 Go
 
 Use VolunteeringDB
-Go
+Go  
 
 
 CREATE TABLE Gender(
