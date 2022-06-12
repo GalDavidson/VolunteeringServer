@@ -115,14 +115,6 @@ CREATE TABLE VolunteersInEvents(
 
 );
 
-CREATE TABLE Comments(
-    CommentID INT IDENTITY(1,1) PRIMARY KEY,
-    CommentText NVARCHAR(255) NOT NULL,
-    EventID INT NOT NULL,
-    VolunteerID INT NOT NULL,
-	CONSTRAINT FK_EventsComments FOREIGN KEY (EventID,VolunteerID) REFERENCES VolunteersInEvents(EventID,VolunteerID)
-);
-
 
 INSERT INTO Branches([BranchLocation])
 VALUES ('אום אל-פחם');
@@ -406,6 +398,10 @@ VALUES ('טכנולוגיה');
 INSERT INTO OccupationalAreas([OccupationName])
 VALUES ('תרבות וספורט');
 
+INSERT INTO OccupationalAreas([OccupationName])
+VALUES ('אלמנות ויתומים');
+
+
 
 INSERT INTO Gender([GenderType])
 VALUES ('נקבה')
@@ -538,16 +534,16 @@ INSERT INTO BranchesOfAssociation(AssociationID, BranchID)
 VALUES (1,22)
 
 INSERT INTO BranchesOfAssociation(AssociationID, BranchID)
-VALUES (1,25)
+VALUES (2,25)
 
 INSERT INTO BranchesOfAssociation(AssociationID, BranchID)
-VALUES (1,36)
+VALUES (2,36)
 
 INSERT INTO BranchesOfAssociation(AssociationID, BranchID)
-VALUES (1,4)
+VALUES (2,4)
 
 INSERT INTO BranchesOfAssociation(AssociationID, BranchID)
-VALUES (1,21)
+VALUES (3,21)
 
 -- Occupational areas of events
 
